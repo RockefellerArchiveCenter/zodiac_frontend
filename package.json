@@ -1,0 +1,24 @@
+{
+  "name": "zodiac_frontend",
+  "version": "1.0.0",
+  "description": "Track ingest of packages and fix errors for born digital and digitized content.",
+  "repository": "https://github.com/RockefellerArchiveCenter/zodiac_frontend.git",
+  "author": "Rockefeller Archive Center",
+  "license": "MIT",
+  "dependencies": {
+    "datatables.net-dt": "^2.2.2",
+    "datatables.net-searchpanes-dt": "^2.3.3",
+    "datatables.net-vue3": "^3.0.4",
+    "vue": "^3.5.13"
+  },
+  "devDependencies": {
+    "@vue/compiler-sfc": "^3.5.13",
+    "process": "^0.11.10",
+    "vue-loader": "^17.3.1",
+    "webpack": "^5.98.0",
+    "webpack-cli": "^6.0.1"
+  },
+  "scripts": {
+    "build": "yarn run webpack --watch"
+  }
+}

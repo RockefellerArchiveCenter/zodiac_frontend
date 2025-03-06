@@ -44,3 +44,8 @@ exclude:
   - vendor/cache/
   - vendor/gems/
   - vendor/ruby/
+  - node_modules
+  - package.json
+  - yarn.lock
+  - webpack.config.js
+  - src

@@ -1,4 +1,5 @@
 const path = require('path')
+const Dotenv = require('dotenv-webpack');
 const { VueLoaderPlugin } = require("vue-loader");
 const webpack = require('webpack');
 
@@ -24,6 +25,7 @@ module.exports = {
     extensions: ['*', '.js', '.vue', '.json'],
   },
   plugins: [
+    new Dotenv(),  // Load environment variables from a .env file
     new VueLoaderPlugin(),
     new webpack.DefinePlugin({
       __VUE_OPTIONS_API__: 'true',  // Enable the Options API

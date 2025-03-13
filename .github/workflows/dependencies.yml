@@ -27,14 +27,12 @@ jobs:
         with:
           node-version: 'lts/*'
       - name: update
-        run: npm install && npm upgrade
+        run: yarn install && yarn upgrade
 
-      - name: Create Pull Request
-        uses: peter-evans/create-pull-request@v6.0.2
+      - name: Run GitHub Actions Version Updater
+        uses: saadmk11/github-actions-version-updater@v0.8.1
         with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-          base: development
-          branch: dependency-updates
-          delete-branch: true
-          title: Dependency Updates
-          commit-message: Dependency updates
+          token: ${{ secrets.ACCESS_TOKEN }}
+          committer_username: 'p-galligan'
+          pull_request_branch: 'dependency-updates'
+          pull_request_title: 'Dependency Updates'

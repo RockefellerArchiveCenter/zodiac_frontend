@@ -13,6 +13,7 @@ const props = defineProps({
 });
 
 const data = ref([]);
+const errorMessage = ref("");
 const BASE_URL = process.env.API_BASE_URL;
 
 onMounted(async () => {
@@ -25,11 +26,13 @@ onMounted(async () => {
     data.value = json.results;
   } catch (error) {
     console.error("Error fetching data:", error);
+    errorMessage.value = 'Error fetching data';
   }
 });
 </script>
 
 <template>
+  <!-- TODO: Add alert component with errorMessage if fetch fails -->
   <div>
     <DataTable
       :id="tableId"

@@ -1,6 +1,8 @@
 # zodiac_frontend
 
-Application to track packages of digital records through the [Project Electron](https://github.com/RockefellerArchiveCenter/project_electron) services and troubleshoot errors.
+An application to track packages of digital records through the [Project Electron](https://github.com/RockefellerArchiveCenter/project_electron) services and troubleshoot errors. 
+
+Built with [Next.js](https://nextjs.org) and [Jest](https://jestjs.io/) for testing.
 
 ## Local development
 

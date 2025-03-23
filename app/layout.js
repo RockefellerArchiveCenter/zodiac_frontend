@@ -6,13 +6,9 @@ export const metadata = {
   description: "Track ingest of packages and fix errors for born digital and digitized content.",
 };
 
-export default function RootLayout({ children }) {
+export default function Template({ children }) {
   return (
     <html lang="en">
-      <head>
-        <link rel="stylesheet" href="https://assets.rockarch.org/v1.0.0/main.min.css" />
-        <link rel="icon" type="image/x-icon" href="https://assets.rockarch.org/assets/img/favicon.ico" />
-      </head>
       <body>
         <Link href="#main" className="skip-link">Skip to main content</Link>
         <header className="header header--blue">

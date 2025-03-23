@@ -1,14 +1,28 @@
-export default function Home() {
+// Homepage of app
+import { fetchData } from '@/lib/fetchData';
+import Table from '@/components/Table';
+
+export default async function Home() {
+  const data = await fetchData('/packages');
+  const columnsConfig = [
+    {
+      title: 'Title',
+      data: 'title',
+      type: 'link',
+      linkPrefix: '/packages/',
+      identifierKey: 'identifier',
+    },
+    { title: 'Package ID', data: 'identifier' },
+    { title: 'Origin', data: 'origin' },
+    { title: 'Status', data: 'last_outcome' },
+  ];
+
   return (
     <div>
       <h1>zodiac</h1>
       <p>Track ingest of packages and fix errors for born digital and digitized content.</p>
       <h2>Package Status</h2>
-      {/* TODO: Insert table with columns for:
-      - package title (as link to packages/:id page)
-      - package id
-      - origin (i.e. Aurora)
-      - and package status */}
+      <Table data={data} columnsConfig={columnsConfig} />
     </div>
   );
 }

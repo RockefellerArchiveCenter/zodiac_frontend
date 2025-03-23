@@ -1,16 +1,37 @@
-export const metadata = {
-  title: "Package Errors - zodiac",
-};
+// /errors page
+import { fetchData } from '@/lib/fetchData';
+import Table from '@/components/Table';
 
-export default function Errors() {
+export const metadata = {
+  title: 'Package Errors - zodiac',
+}
+
+export default async function Errors() {
+  const data = await fetchData('/events?outcome=FAILURE');
+  const columnsConfig = [
+    {
+      title: 'Title',
+      data: 'package_title',
+      type: 'link',
+      linkPrefix: '/packages/',
+      identifierKey: 'package_identifier',
+    },
+    { title: 'Package ID', data: 'package_identifier' },
+    { title: 'Origin', data: 'package_origin' },
+    {
+      title: 'Service Error',
+      data: 'message',
+      type: 'link',
+      linkPrefix: '/events/',
+      identifierKey: 'identifier',
+    },
+    { title: 'Date/Time', data: 'last_modified'},
+  ];
+
   return (
     <div>
       <h1>Package Errors</h1>
-      {/* TODO: Insert table with columns for:
-      - package title (as link to packages/:id page)
-      - package id
-      - Service error (Error - application:service as link to error events/:id page)
-      - Date/time */}
+      <Table columnsConfig={columnsConfig} data={data} />
     </div>
   );
 }

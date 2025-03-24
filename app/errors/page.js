@@ -1,5 +1,6 @@
 // /errors page
 import { fetchData } from '@/lib/fetchData';
+import Alert from '@/components/Alert';
 import Table from '@/components/Table';
 
 export const metadata = {
@@ -30,6 +31,7 @@ export default async function Errors() {
 
   return (
     <div>
+      {data.error && <Alert message={data.error} />}
       <h1>Package Errors</h1>
       <Table columnsConfig={columnsConfig} data={data} />
     </div>

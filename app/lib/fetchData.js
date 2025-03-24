@@ -1,12 +1,12 @@
 // Return the `results` array from a specified API endpoint
 export async function fetchData(apiEndpoint) {
-  const baseURL = process.env.NEXT_PUBLIC_API_BASE_URL; // specified in .env file
+  const baseURL = process.env.NEXT_PUBLIC_API_BASE_URL; // API base URL from .env file
 
   try {
     const res = await fetch(`${baseURL}${apiEndpoint}`);
 
     if (!res.ok) {
-      throw new Error(`Failed to fetch data from ${apiEndpoint}. Status: ${res.status} ${res.statusText}`);
+      return { error: `Failed to fetch data from ${apiEndpoint}. Status: ${res.status} ${res.statusText}` };
     }
 
     const data = await res.json();
@@ -14,7 +14,7 @@ export async function fetchData(apiEndpoint) {
   } catch (error) {
     console.error("Error fetching data:", error);
 
-    // Create error for a UI component to display
-    throw new Error(`Error fetching data from ${apiEndpoint}: ${error.message}`);
+    // Return an error object to use in UI
+    return { error: `Error fetching data from ${apiEndpoint}: ${error.message}` };
   }
 }

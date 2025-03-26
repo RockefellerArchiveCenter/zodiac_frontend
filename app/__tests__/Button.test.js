@@ -12,6 +12,7 @@ describe('Button Component', () => {
         type='submit'
         color='blue'
         size='md'
+        handleClick={jest.fn()}
         ariaLabel='Submit form'
         ariaHasPopup={false}
         ariaExpanded={true}

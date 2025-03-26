@@ -14,7 +14,7 @@ const Button = props => (
   </button>)
 
 Button.propTypes = {
-  type: PropTypes.oneOf(['button', 'submit', 'reset']),
+  type: PropTypes.oneOf(['button', 'submit', 'reset']).isRequired,
   color: PropTypes.oneOf([
     'light-blue', 
     'blue', 
@@ -23,16 +23,15 @@ Button.propTypes = {
     'transparent', 
     'gray', 
     'dark-gray', 
-    'black']),
-  size: PropTypes.oneOf(['xs', 'sm', 'md', 'lg']),
-  className: PropTypes.string,
-  handleClick: PropTypes.func,
-  ariaLabel: PropTypes.string,
+    'black']).isRequired,
+  size: PropTypes.oneOf(['xs', 'sm', 'md', 'lg']).isRequired,
+  handleClick: PropTypes.func.isRequired,
+  ariaLabel: PropTypes.string.isRequired,
   ariaHasPopup: PropTypes.string,
   ariaExpanded: PropTypes.string,
   ariaPressed: PropTypes.string,
   disabled: PropTypes.bool,
-  label: PropTypes.string
+  label: PropTypes.string.isRequired
 }
 
 export default Button

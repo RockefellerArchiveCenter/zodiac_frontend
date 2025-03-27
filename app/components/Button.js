@@ -26,7 +26,7 @@ Button.propTypes = {
     'black']).isRequired,
   size: PropTypes.oneOf(['xs', 'sm', 'md', 'lg']).isRequired,
   handleClick: PropTypes.func.isRequired,
-  ariaLabel: PropTypes.string.isRequired,
+  ariaLabel: PropTypes.string,
   ariaHasPopup: PropTypes.string,
   ariaExpanded: PropTypes.string,
   ariaPressed: PropTypes.string,

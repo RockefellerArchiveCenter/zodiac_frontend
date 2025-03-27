@@ -4,7 +4,6 @@ import Badge from '../components/Badge';
 
 describe('Badge Component', () => {
 
-  // Test if the table renders columns and data
   it('renders the badge', () => {
 
     render(

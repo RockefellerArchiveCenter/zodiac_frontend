@@ -4,7 +4,6 @@ import Button from '../components/Button';
 
 describe('Button Component', () => {
 
-  // Test if the table renders columns and data
   it('renders the button', () => {
 
     render(

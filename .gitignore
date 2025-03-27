@@ -17,9 +17,6 @@
 /.next/
 /out/
 
-# development
-/_site
-
 # production
 /build
 

@@ -6,7 +6,7 @@ export const SummaryListItem = ({ label, value }) => (
 );
 
 export const SummaryList = ({ title, children }) => (
-  <div className="card">
+  <div className="card card--container">
     {title && <h2>{title}</h2>}
     <dl className="summary-list">{children}</dl>
   </div>

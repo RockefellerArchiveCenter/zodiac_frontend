@@ -22,8 +22,8 @@ When you're done, shut down the application with ctrl+c.
 
 ## Tests
 
-zodiac_frontend comes with unit tests and linting. By running the `yarn prepare` script when 
-setting up local development, you are installing a git pre-commit hook which will attempt to 
+zodiac_frontend comes with unit tests and linting. By running the `yarn prepare` script when
+setting up local development, you are installing a git pre-commit hook which will attempt to
 fix any formatting errors before committing code.
 
 You can report any linting issues at any time by running `yarn lint`.

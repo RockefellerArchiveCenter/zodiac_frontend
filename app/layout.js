@@ -1,21 +1,26 @@
 import "./globals.css";
-import Link from 'next/link';
+import Link from "next/link";
 
 export const metadata = {
   title: "zodiac",
-  description: "Track ingest of packages and fix errors for born digital and digitized content.",
+  description:
+    "Track ingest of packages and fix errors for born digital and digitized content.",
 };
 
 export default function Template({ children }) {
   return (
     <html lang="en">
       <body>
-        <Link href="#main" className="skip-link">Skip to main content</Link>
+        <Link href="#main" className="skip-link">
+          Skip to main content
+        </Link>
         <header className="header header--blue">
           <div className="wrapper">
             <div className="container flex">
               <div className="header__brand header__brand--text">
-                <Link href="/" className="header__brand-title">zodiac</Link>
+                <Link href="/" className="header__brand-title">
+                  zodiac
+                </Link>
                 <div className="header__brand-subtitle">
                   Track packages and troubleshoot errors
                 </div>
@@ -36,9 +41,7 @@ export default function Template({ children }) {
           </div>
         </header>
         <div className="container grid">
-          <main id="main">
-            {children}
-          </main>
+          <main id="main">{children}</main>
         </div>
       </body>
     </html>

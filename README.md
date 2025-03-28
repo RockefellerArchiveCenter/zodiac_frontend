@@ -13,11 +13,20 @@ Install [git](https://git-scm.com/) and [yarn](https://yarnpkg.com/). Clone the 
 Install dependencies and start the application:
 
     $ yarn install
+    $ yarn prepare
     $ yarn dev
 
 Once the application starts, access it in your browser at [http://localhost:3000](http://localhost:3000).
 
 When you're done, shut down the application with ctrl+c.
+
+## Tests
+
+zodiac_frontend comes with unit tests and linting. By running the `yarn prepare` script when
+setting up local development, you are installing a git pre-commit hook which will attempt to
+fix any formatting errors before committing code.
+
+You can report any linting issues at any time by running `yarn lint`.
 
 ## Visual regression testing
 

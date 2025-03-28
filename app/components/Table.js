@@ -1,13 +1,13 @@
 // TODO: Address error: "In HTML, whitespace text nodes cannot be a child of <table>"
-'use client';
+"use client";
 
-import dynamic from 'next/dynamic';
-import 'datatables.net-dt/css/dataTables.dataTables.css';
+import dynamic from "next/dynamic";
+import "datatables.net-dt/css/dataTables.dataTables.css";
 
 //Dynamic import of DataTable component (see https://datatables.net/forums/discussion/79941/)
 const DataTable = dynamic(
   async () => {
-    const dtReact = import('datatables.net-react');
+    const dtReact = import("datatables.net-react");
     const dtNet = import(`datatables.net-dt`);
 
     const [reactMod, dtNetMod] = await Promise.all([dtReact, dtNet]);
@@ -15,12 +15,13 @@ const DataTable = dynamic(
     reactMod.default.use(dtNetMod.default);
     return reactMod.default;
   },
-  { ssr: false } // Disable server-side rendering to avoid hydration issues
+  { ssr: false }, // Disable server-side rendering to avoid hydration issues
 );
 
 export default function Table({ data, columnsConfig }) {
   const columns = columnsConfig.map((col) => {
-    if (col.type === "link") { // Add ability to specify link in column data
+    if (col.type === "link") {
+      // Add ability to specify link in column data
       return {
         ...col,
         render: (data, type, row) => {

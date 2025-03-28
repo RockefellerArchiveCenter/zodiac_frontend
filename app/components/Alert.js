@@ -1,6 +1,6 @@
-const Alert = ({ color='orange', icon='error_outline', message }) => {
+const Alert = ({ color = "orange", icon = "error_outline", message }) => {
   const alertClass = `alert alert--${color}`;
-  const iconClass = `alert__icon`
+  const iconClass = `alert__icon`;
 
   return (
     <div className={alertClass} role="status">
@@ -8,9 +8,7 @@ const Alert = ({ color='orange', icon='error_outline', message }) => {
         {icon}
       </span>
       <div>
-        <p className="alert__text">
-          {message}
-        </p>
+        <p className="alert__text">{message}</p>
       </div>
     </div>
   );

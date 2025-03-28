@@ -1,32 +1,32 @@
 // /errors page
-import { fetchData } from '@/lib/fetchData';
-import Alert from '@/components/Alert';
-import Table from '@/components/Table';
+import { fetchData } from "@/lib/fetchData";
+import Alert from "@/components/Alert";
+import Table from "@/components/Table";
 
 export const metadata = {
-  title: 'Package Errors - zodiac',
-}
+  title: "Package Errors - zodiac",
+};
 
 export default async function Errors() {
-  const data = await fetchData('/events?outcome=FAILURE');
+  const data = await fetchData("/events?outcome=FAILURE");
   const columnsConfig = [
     {
-      title: 'Title',
-      data: 'package_title',
-      type: 'link',
-      linkPrefix: '/packages/',
-      identifierKey: 'package_identifier',
+      title: "Title",
+      data: "package_title",
+      type: "link",
+      linkPrefix: "/packages/",
+      identifierKey: "package_identifier",
     },
-    { title: 'Package ID', data: 'package_identifier' },
-    { title: 'Origin', data: 'package_origin' },
+    { title: "Package ID", data: "package_identifier" },
+    { title: "Origin", data: "package_origin" },
     {
-      title: 'Service Error',
-      data: 'message',
-      type: 'link',
-      linkPrefix: '/events/',
-      identifierKey: 'identifier',
+      title: "Service Error",
+      data: "message",
+      type: "link",
+      linkPrefix: "/events/",
+      identifierKey: "identifier",
     },
-    { title: 'Date/Time', data: 'last_modified'},
+    { title: "Date/Time", data: "last_modified" },
   ];
 
   return (

@@ -6,7 +6,7 @@
     "start": "next start",
     "lint": "next lint",
     "test": "jest",
-    "prepare": "husky && husky install"
+    "prepare": "husky"
   },
   "dependencies": {
     "datatables.net-dt": "^2.2.2",

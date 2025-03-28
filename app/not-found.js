@@ -4,10 +4,9 @@ export const metadata = {
 
 export default function NotFound() {
   return (
-  <div>
+    <div>
       <h1>404 - Page Not Found</h1>
       <p>Sorry, the requested page was not found on the server.</p>
-  </div>
-
-  )
+    </div>
+  );
 }

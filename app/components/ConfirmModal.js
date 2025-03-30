@@ -9,7 +9,7 @@ const ConfirmModal = ({
   content,
 }) => (
   <Modal
-    appElement={appElement ? appElement : Modal.setAppElement("#root")}
+    appElement={appElement}
     isOpen={isOpen}
     onRequestClose={toggleModal}
     className={`modal ${className}`}

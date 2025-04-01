@@ -1,5 +1,5 @@
 export const metadata = {
-  title: "404: Page Not Found - zodiac",
+  title: "404: Page Not Found - Zodiac",
 };
 
 export default function NotFound() {

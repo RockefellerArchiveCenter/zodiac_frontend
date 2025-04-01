@@ -2,7 +2,7 @@ import "./globals.css";
 import Link from "next/link";
 
 export const metadata = {
-  title: "zodiac",
+  title: "Zodiac",
   description:
     "Track ingest of packages and fix errors for born digital and digitized content.",
 };
@@ -19,7 +19,7 @@ export default function Template({ children }) {
             <div className="container flex">
               <div className="header__brand header__brand--text">
                 <Link href="/" className="header__brand-title">
-                  zodiac
+                  Zodiac
                 </Link>
                 <div className="header__brand-subtitle">
                   Track packages and troubleshoot errors

@@ -1,7 +1,11 @@
+import preloadAll from "jest-next-dynamic";
 import { render, screen } from "@testing-library/react";
+import "@testing-library/jest-dom";
 import Table from "../components/Table";
 
-jest.mock("../lib/fetchData"); // Mock the fetchData function
+beforeAll(async () => {
+  await preloadAll();
+});
 
 describe("Table Component", () => {
   // Test if the table renders columns and data
@@ -17,7 +21,26 @@ describe("Table Component", () => {
     ).toBeInTheDocument(); // Data cell
   });
 
-  // TODO: Test if data is fetched and the correct number of rows are displayed
+  it("renders links in cells", () => {
+    // Test if the table correctly creates links when desired.
+    const columnsConfig = [
+      {
+        title: "Package ID",
+        data: "identifier",
+        type: "link",
+        linkPrefix: "/objects/",
+        identifierKey: "identifier",
+      },
+    ];
+    const data = [{ identifier: "8bf992c0-1547-403a-93d4-ac531e7ed080" }];
 
-  //TODO: Test if an error message is displayed if data fetching fails
+    render(<Table columnsConfig={columnsConfig} data={data} />);
+
+    expect(
+      screen.getByText("8bf992c0-1547-403a-93d4-ac531e7ed080"),
+    ).toHaveAttribute("href");
+    expect(screen.getByText("8bf992c0-1547-403a-93d4-ac531e7ed080").href).toBe(
+      "http://localhost/objects/8bf992c0-1547-403a-93d4-ac531e7ed080",
+    );
+  });
 });

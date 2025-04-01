@@ -4,7 +4,7 @@ import Alert from "@/components/Alert";
 import Table from "@/components/Table";
 
 export const metadata = {
-  title: "Package Errors - zodiac",
+  title: "Package Errors - Zodiac",
 };
 
 export default async function Errors() {

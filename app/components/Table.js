@@ -1,10 +1,9 @@
-// TODO: Address error: "In HTML, whitespace text nodes cannot be a child of <table>"
 "use client";
 
 import dynamic from "next/dynamic";
 import "datatables.net-dt/css/dataTables.dataTables.css";
 
-//Dynamic import of DataTable component (see https://datatables.net/forums/discussion/79941/)
+// Dynamic import of DataTable component (see https://datatables.net/forums/discussion/79941/)
 const DataTable = dynamic(
   async () => {
     const dtReact = import("datatables.net-react");
@@ -34,19 +33,19 @@ export default function Table({ data, columnsConfig }) {
   });
 
   return (
-    <div>
-      <DataTable
-        columns={columns}
-        data={data}
-        className="table table-striped"
-        options={{
-          processing: true,
-          paging: true,
-          searching: true,
-          ordering: true,
-          lengthMenu: [10, 25, 50, 100],
-        }}
-      />
-    </div>
+    <DataTable
+      columns={columns}
+      data={data}
+      className="table table-striped"
+      options={{
+        processing: true,
+        paging: true,
+        searching: true,
+        ordering: true,
+        lengthMenu: [10, 25, 50, 100],
+      }}
+    >
+      <></>
+    </DataTable> // datatables.net-react requires a child element
   );
 }

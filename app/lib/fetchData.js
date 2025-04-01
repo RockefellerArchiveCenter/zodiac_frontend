@@ -12,7 +12,13 @@ export async function fetchData(apiEndpoint) {
     }
 
     const data = await res.json();
-    return data.results || [];
+    // Return data wrapped in "results"
+    if (data.results) {
+      return data.results;
+    }
+
+    // Return raw data
+    return data || [];
   } catch (error) {
     console.error("Error fetching data:", error);
 

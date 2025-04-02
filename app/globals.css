@@ -4,3 +4,15 @@
   grid-column: 2 / span 10;
   margin-bottom: 30px;
 }
+
+.card-list {
+  grid-template-columns: repeat(1, 1fr);
+
+  @media screen and (min-width: 1024px) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.card-list h2 {
+  margin-top: 0;
+}

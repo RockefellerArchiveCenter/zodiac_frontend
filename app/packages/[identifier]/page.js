@@ -1,7 +1,8 @@
 import { fetchData } from "@/lib/fetchData";
 import Alert from "@/components/Alert";
-import Table from "@/components/Table";
 import Badge from "@/components/Badge";
+import { SummaryList, SummaryListItem } from "@/components/SummaryList";
+import Table from "@/components/Table";
 
 export const metadata = {
   title: "Package Details - Zodiac",
@@ -10,11 +11,16 @@ export const metadata = {
 export default async function PackageDetail({ params }) {
   const { identifier } = await params;
 
-  const data = await fetchData(`/packages/${identifier}/events`);
+  const [eventsData, packageData] = await Promise.all([
+    fetchData(`/packages/${identifier}/events`),
+    fetchData(`/packages/${identifier}`),
+  ]);
+
+  const error = eventsData.error || packageData.error;
 
   // Get the most recent event outcome and set the badge color and text
   // based on the last event
-  const outcome = data[0]?.outcome;
+  const outcome = eventsData[0]?.outcome;
 
   let badgeColor = "light-blue";
   let badgeText = "IN PROCESS";
@@ -42,12 +48,32 @@ export default async function PackageDetail({ params }) {
 
   return (
     <div>
-      {data.error && <Alert message={data.error} />}
-      <h1>Package Details</h1>
+      {error && <Alert message={error} />}
+
+      <h1>Package {packageData.title ? `: ${packageData.title}` : ""}</h1>
+
       <div className="mb-30">
-      <Badge color={badgeColor} text={badgeText} />
+        <Badge color={badgeColor} text={badgeText} />
       </div>
-      <Table columnsConfig={columnsConfig} data={data} />
+      {/* TODO: add missing data values */}
+      <div className="card-list mb-30">
+        <SummaryList title="Details">
+          <SummaryListItem label="Identifier" value={packageData.identifier} />
+          <SummaryListItem label="Package Title" value={packageData.title} />
+          <SummaryListItem label="Package Origin" value={packageData.origin} />
+          <SummaryListItem label="Package File Path" value={null} />
+        </SummaryList>
+        <SummaryList title="External Identifiers">
+          <SummaryListItem label="ArchivesSpace Archival Object" value={null} />
+          <SummaryListItem label="ArchivesSpace Accession" value={null} />
+          <SummaryListItem label="Archivematica AIP UUID" value={null} />
+          <SummaryListItem label="Aurora Transfer" value={null} />
+          <SummaryListItem label="Aurora Accession" value={null} />
+        </SummaryList>
+      </div>
+
+      <h2>Package Events</h2>
+      <Table columnsConfig={columnsConfig} data={eventsData} />
     </div>
   );
 }

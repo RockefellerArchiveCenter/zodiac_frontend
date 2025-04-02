@@ -16,3 +16,7 @@
 .card-list h2 {
   margin-top: 0;
 }
+
+.card {
+  flex-direction: column;
+}

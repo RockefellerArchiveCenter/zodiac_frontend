@@ -59,7 +59,6 @@ export default async function PackageDetail({ params }) {
       <div className="card-list mb-30">
         <SummaryList title="Details">
           <SummaryListItem label="Identifier" value={packageData.identifier} />
-          <SummaryListItem label="Package Title" value={packageData.title} />
           <SummaryListItem label="Package Origin" value={packageData.origin} />
           <SummaryListItem label="Package File Path" value={null} />
         </SummaryList>
@@ -67,7 +66,10 @@ export default async function PackageDetail({ params }) {
           <SummaryListItem label="ArchivesSpace Archival Object" value={null} />
           <SummaryListItem label="ArchivesSpace Accession" value={null} />
           <SummaryListItem label="Archivematica AIP UUID" value={null} />
-          <SummaryListItem label="Aurora Transfer" value={null} />
+          <SummaryListItem
+            label="Aurora Transfer"
+            value={packageData.identifiers?.aurora_package}
+          />
           <SummaryListItem label="Aurora Accession" value={null} />
         </SummaryList>
       </div>

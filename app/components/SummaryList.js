@@ -1,7 +1,7 @@
 export const SummaryListItem = ({ label, value }) => (
   <div className="summary-list__row">
     <dt className="summary-list__key">{label}</dt>
-    <dd className="summary-list__value">{value}</dd>
+    <dd className="summary-list__value">{value || "None"}</dd>
   </div>
 );
 

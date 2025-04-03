@@ -1,7 +1,7 @@
 import { fetchData } from "@/lib/fetchData";
 import Alert from "@/components/Alert";
 import OutcomeBadge from "@/components/OutcomeBadge";
-import { SummaryList, SummaryListItem } from "@/components/SummaryList";
+import SummaryList from "@/components/SummaryList";
 import Table from "@/components/Table";
 
 export const metadata = {
@@ -45,21 +45,21 @@ export default async function PackageDetail({ params }) {
       </div>
       {/* TODO: add missing data values */}
       <div className="card-list mb-30">
-        <SummaryList title="Details">
-          <SummaryListItem label="Identifier" value={packageData.identifier} />
-          <SummaryListItem label="Package Origin" value={packageData.origin} />
-          <SummaryListItem label="Package File Path" value={null} />
-        </SummaryList>
-        <SummaryList title="External Identifiers">
-          <SummaryListItem label="ArchivesSpace Archival Object" value={null} />
-          <SummaryListItem label="ArchivesSpace Accession" value={null} />
-          <SummaryListItem label="Archivematica AIP UUID" value={null} />
-          <SummaryListItem
-            label="Aurora Transfer"
-            value={packageData.identifiers?.aurora_package}
-          />
-          <SummaryListItem label="Aurora Accession" value={null} />
-        </SummaryList>
+        <SummaryList title="Details" items={
+          [
+            {label: "Identifier", value: packageData.identifier},
+            {label: "Package Origin", value: packageData.origin}
+          ]
+        }/>
+        <SummaryList title="External Identifiers" items={
+          [
+            {label: "ArchivesSpace Archival Object", value: null},
+            {label: "ArchivesSpace Accession", value: null},
+            {label: "Archivematica AIP UUID", value: null},
+            {label: "Aurora Transfer", value: packageData.identifiers?.aurora_package},
+            {label: "Aurora Accession", value: null}
+          ]
+        }/>
       </div>
 
       <h2>Package Events</h2>

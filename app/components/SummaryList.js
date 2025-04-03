@@ -4,16 +4,17 @@ const SummaryListItem = ({ label, value }) => (
     <dd className="summary-list__value">{value || "None"}</dd>
   </div>
 );
- 
+
 const SummaryList = ({ title, items }) => (
   <div className="card card--container">
     {title && <h2>{title}</h2>}
     <dl className="summary-list">
-      {items && items.map(i => (
-        <SummaryListItem key={i.label} label={i.label} value={i.value} />
-      ))}
+      {items &&
+        items.map((i) => (
+          <SummaryListItem key={i.label} label={i.label} value={i.value} />
+        ))}
     </dl>
   </div>
 );
 
-export default SummaryList
+export default SummaryList;

@@ -45,21 +45,26 @@ export default async function PackageDetail({ params }) {
       </div>
       {/* TODO: add missing data values */}
       <div className="card-list mb-30">
-        <SummaryList title="Details" items={
-          [
-            {label: "Identifier", value: packageData.identifier},
-            {label: "Package Origin", value: packageData.origin}
-          ]
-        }/>
-        <SummaryList title="External Identifiers" items={
-          [
-            {label: "ArchivesSpace Archival Object", value: null},
-            {label: "ArchivesSpace Accession", value: null},
-            {label: "Archivematica AIP UUID", value: null},
-            {label: "Aurora Transfer", value: packageData.identifiers?.aurora_package},
-            {label: "Aurora Accession", value: null}
-          ]
-        }/>
+        <SummaryList
+          title="Details"
+          items={[
+            { label: "Identifier", value: packageData.identifier },
+            { label: "Package Origin", value: packageData.origin },
+          ]}
+        />
+        <SummaryList
+          title="External Identifiers"
+          items={[
+            { label: "ArchivesSpace Archival Object", value: null },
+            { label: "ArchivesSpace Accession", value: null },
+            { label: "Archivematica AIP UUID", value: null },
+            {
+              label: "Aurora Transfer",
+              value: packageData.identifiers?.aurora_package,
+            },
+            { label: "Aurora Accession", value: null },
+          ]}
+        />
       </div>
 
       <h2>Package Events</h2>

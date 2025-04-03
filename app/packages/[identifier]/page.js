@@ -1,6 +1,6 @@
 import { fetchData } from "@/lib/fetchData";
 import Alert from "@/components/Alert";
-import Badge from "@/components/Badge";
+import OutcomeBadge from "@/components/OutcomeBadge";
 import { SummaryList, SummaryListItem } from "@/components/SummaryList";
 import Table from "@/components/Table";
 
@@ -18,20 +18,8 @@ export default async function PackageDetail({ params }) {
 
   const error = eventsData.error || packageData.error;
 
-  // Get the most recent event outcome and set the badge color and text
-  // based on the last event
+  // Get the most recent event outcome for the package
   const outcome = eventsData[0]?.outcome;
-
-  let badgeColor = "light-blue";
-  let badgeText = "IN PROCESS";
-
-  if (outcome === "SUCCESS") {
-    badgeColor = "blue";
-    badgeText = outcome;
-  } else if (outcome === "FAILURE") {
-    badgeColor = "orange";
-    badgeText = outcome;
-  }
 
   const columnsConfig = [
     {
@@ -53,7 +41,7 @@ export default async function PackageDetail({ params }) {
       <h1>Package {packageData.title ? `: ${packageData.title}` : ""}</h1>
 
       <div className="mb-30">
-        <Badge color={badgeColor} text={badgeText} />
+        <OutcomeBadge outcome={outcome} />
       </div>
       {/* TODO: add missing data values */}
       <div className="card-list mb-30">

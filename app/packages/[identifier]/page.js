@@ -17,9 +17,8 @@ export default async function PackageDetail({ params }) {
   ]);
 
   const error = eventsData.error || packageData.error;
-
-  // Get the most recent event outcome for the package
-  const outcome = eventsData[0]?.outcome;
+  const outcome = eventsData[0]?.outcome; // Get the most recent event outcome for the package
+  const identifiers = packageData.identifiers || {};
 
   const columnsConfig = [
     {
@@ -43,7 +42,6 @@ export default async function PackageDetail({ params }) {
       <div className="mb-30">
         <OutcomeBadge outcome={outcome} />
       </div>
-      {/* TODO: add missing data values */}
       <div className="card-list mb-30">
         <SummaryList
           title="Details"
@@ -55,14 +53,20 @@ export default async function PackageDetail({ params }) {
         <SummaryList
           title="External Identifiers"
           items={[
-            { label: "ArchivesSpace Archival Object", value: null },
-            { label: "ArchivesSpace Accession", value: null },
-            { label: "Archivematica AIP UUID", value: null },
             {
-              label: "Aurora Transfer",
-              value: packageData.identifiers?.aurora_package,
+              label: "ArchivesSpace Archival Object",
+              value: identifiers.archivesspace_archival_object,
             },
-            { label: "Aurora Accession", value: null },
+            {
+              label: "ArchivesSpace Accession",
+              value: identifiers.archivesspace_accession,
+            },
+            {
+              label: "Archivematica AIP UUID",
+              value: identifiers.archivematica_uuid,
+            },
+            { label: "Aurora Transfer", value: identifiers.aurora_package },
+            { label: "Aurora Accession", value: identifiers.aurora_accession },
           ]}
         />
       </div>

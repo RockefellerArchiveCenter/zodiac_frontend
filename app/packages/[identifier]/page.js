@@ -39,40 +39,42 @@ export default async function PackageDetail({ params }) {
 
       <h1>Package {packageData.title ? `: ${packageData.title}` : ""}</h1>
 
-      <div className="mb-30">
+      <div className="mb-50">
         <OutcomeBadge outcome={outcome} />
       </div>
-      <div className="card-list mb-30">
-        <SummaryList
-          title="Details"
-          items={[
-            { label: "Identifier", value: packageData.identifier },
-            { label: "Package Origin", value: packageData.origin },
-          ]}
-        />
-        <SummaryList
-          title="External Identifiers"
-          items={[
-            {
-              label: "ArchivesSpace Archival Object",
-              value: identifiers.archivesspace_archival_object,
-            },
-            {
-              label: "ArchivesSpace Accession",
-              value: identifiers.archivesspace_accession,
-            },
-            {
-              label: "Archivematica AIP UUID",
-              value: identifiers.archivematica_uuid,
-            },
-            { label: "Aurora Transfer", value: identifiers.aurora_package },
-            { label: "Aurora Accession", value: identifiers.aurora_accession },
-          ]}
-        />
-      </div>
+      <SummaryList
+        className="mb-50"
+        items={[
+          { label: "Package Identifier", value: packageData.identifier },
+          { label: "Package Origin", value: packageData.origin },
+        ]}
+      />
 
       <h2>Package Events</h2>
-      <Table columnsConfig={columnsConfig} data={eventsData} />
+      <div className="mb-50">
+        <Table columnsConfig={columnsConfig} data={eventsData} />
+      </div>
+
+      <SummaryList
+        className="card card--container mb-50"
+        title="External Identifiers"
+        items={[
+          { label: "Aurora Transfer", value: identifiers.aurora_package },
+          { label: "Aurora Accession", value: identifiers.aurora_accession },
+          {
+            label: "Archivematica AIP UUID",
+            value: identifiers.archivematica_uuid,
+          },
+          {
+            label: "ArchivesSpace Accession",
+            value: identifiers.archivesspace_accession,
+          },
+          {
+            label: "ArchivesSpace Archival Object",
+            value: identifiers.archivesspace_archival_object,
+          },
+        ]}
+      />
     </div>
   );
 }

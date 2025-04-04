@@ -5,8 +5,8 @@ const SummaryListItem = ({ label, value }) => (
   </div>
 );
 
-const SummaryList = ({ title, items }) => (
-  <div className="card card--container">
+const SummaryList = ({ title, items, className }) => (
+  <div className={className}>
     {title && <h2>{title}</h2>}
     <dl className="summary-list">
       {items &&

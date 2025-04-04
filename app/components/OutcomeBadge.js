@@ -12,7 +12,9 @@ const OutcomeBadge = ({ outcome }) => {
     badgeText = outcome;
   }
 
-  return <span className={`badge badge--${badgeColor}`}>{badgeText}</span>;
+  return (
+    <span className={`badge badge--${badgeColor}`}>STATUS: {badgeText}</span>
+  );
 };
 
 export default OutcomeBadge;

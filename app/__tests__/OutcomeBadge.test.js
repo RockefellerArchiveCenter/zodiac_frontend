@@ -6,7 +6,7 @@ describe("OutcomeBadge Component", () => {
   it("renders the badge when no outcome is provided", () => {
     render(<OutcomeBadge />);
 
-    const badge = screen.getByText("IN PROCESS");
+    const badge = screen.getByText("STATUS: IN PROCESS");
     expect(badge).toBeInTheDocument();
     expect(badge.className).toBe("badge badge--light-blue");
   });
@@ -14,7 +14,7 @@ describe("OutcomeBadge Component", () => {
   it("renders the badge with a success outcome", () => {
     render(<OutcomeBadge outcome="SUCCESS" />);
 
-    const badge = screen.getByText("SUCCESS");
+    const badge = screen.getByText("STATUS: SUCCESS");
     expect(badge).toBeInTheDocument();
     expect(badge.className).toBe("badge badge--blue");
   });
@@ -22,7 +22,7 @@ describe("OutcomeBadge Component", () => {
   it("renders the badge with a failure outcome", () => {
     render(<OutcomeBadge outcome="FAILURE" />);
 
-    const badge = screen.getByText("FAILURE");
+    const badge = screen.getByText("STATUS: FAILURE");
     expect(badge).toBeInTheDocument();
     expect(badge.className).toBe("badge badge--orange");
   });

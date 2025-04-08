@@ -7,6 +7,7 @@ describe("Summary List Component", () => {
     render(
       <SummaryList
         title="Summary List"
+        className="card"
         items={[
           {
             label: "Package identifier",
@@ -19,6 +20,7 @@ describe("Summary List Component", () => {
     );
 
     expect(screen.getByText("Summary List")).toBeInTheDocument();
+    expect(screen.getByText("Summary List").parentElement).toHaveClass("card");
     expect(
       screen.getByText("85e5982-b111-4dea-88f0-102c3d0bbffc"),
     ).toBeInTheDocument();

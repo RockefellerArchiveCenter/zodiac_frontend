@@ -1,6 +1,6 @@
 import { render, screen, waitFor } from "@testing-library/react";
 import "@testing-library/jest-dom";
-import PackageDetail, { metadata } from "../packages/[identifier]/page";
+import PackageDetail from "../packages/[identifier]/page";
 import { fetchData } from "../lib/fetchData";
 
 // Mock the fetchData function

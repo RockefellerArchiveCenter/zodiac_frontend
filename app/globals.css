@@ -4,3 +4,8 @@
   grid-column: 2 / span 10;
   margin-bottom: 30px;
 }
+
+.card h2 {
+  margin-top: 0;
+}
+

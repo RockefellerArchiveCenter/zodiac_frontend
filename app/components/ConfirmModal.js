@@ -1,3 +1,5 @@
+"use client";
+
 import Modal from "react-modal";
 
 const ConfirmModal = ({

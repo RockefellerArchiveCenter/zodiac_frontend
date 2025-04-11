@@ -4,6 +4,7 @@ import Button from "@/components/Button";
 import ConfirmModal from "@/components/ConfirmModal";
 import OutcomeBadge from "@/components/OutcomeBadge";
 import SummaryList from "@/components/SummaryList";
+import Link from "next/link";
 
 // async function rerunService() {
 //   // TODO: Implement rerun service
@@ -36,7 +37,18 @@ export default async function EventDetail({ params }) {
           <SummaryList
             className="card card--container mb-30"
             items={[
-              { label: "Package Identifier", value: eventData.identifier },
+              {
+                label: "Package Title",
+                value: eventData.package_title,
+              },
+              {
+                label: "Package Identifier",
+                value: (
+                  <Link href={`/packages/${eventData.package_identifier}`}>
+                    {eventData.package_identifier}
+                  </Link>
+                ),
+              },
               { label: "Service", value: eventData.service },
               {
                 label: "Message",

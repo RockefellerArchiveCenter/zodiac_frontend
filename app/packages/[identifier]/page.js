@@ -35,9 +35,7 @@ export default async function PackageDetail({ params }) {
 
   return (
     <div>
-      <h1>
-        Package Details {packageData.title ? `: ${packageData.title}` : ""}
-      </h1>
+      <h1>Package Details</h1>
 
       {error ? (
         <>
@@ -54,6 +52,7 @@ export default async function PackageDetail({ params }) {
           <SummaryList
             className="mb-50"
             items={[
+              { label: "Package Title", value: packageData.title },
               { label: "Package Identifier", value: packageData.identifier },
               { label: "Package Origin", value: packageData.origin },
             ]}

@@ -14,7 +14,10 @@ const DataTable = dynamic(
     reactMod.default.use(dtNetMod.default);
     return reactMod.default;
   },
-  { ssr: false }, // Disable server-side rendering to avoid hydration issues
+  {
+    ssr: false, // Disable server-side rendering to avoid hydration issues
+    loading: () => <p className="loading-text loading-dots">Loading table</p>,
+  },
 );
 
 export default function Table({ data, columnsConfig }) {
@@ -43,6 +46,9 @@ export default function Table({ data, columnsConfig }) {
         searching: true,
         ordering: true,
         lengthMenu: [10, 25, 50, 100],
+        language: {
+          emptyTable: "No data available",
+        },
       }}
     >
       <></>

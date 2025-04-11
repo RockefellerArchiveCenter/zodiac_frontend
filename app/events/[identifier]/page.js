@@ -19,40 +19,48 @@ export default async function EventDetail({ params }) {
 
   return (
     <div>
-      {eventData.error && <Alert message={eventData.error} />}
-
       <h1>Event Details</h1>
 
-      <div className="mb-50">
-        <OutcomeBadge outcome={eventData.outcome} />
-      </div>
-      <SummaryList
-        className="card card--container mb-30"
-        items={[
-          { label: "Package Identifier", value: eventData.identifier },
-          { label: "Service", value: eventData.service },
-          {
-            label: "Message",
-            value: `${eventData.message} ${eventData.traceback ? eventData.traceback : ""}`,
-          },
-        ]}
-      />
-      <Button
-        type="button"
-        color="blue"
-        size="md"
-        label="Rerun service"
-        // TODO: Implement modal open
-        // handleClick={ }
-      />
-      {/* TODO: Implement modal open */}
-      {/* <ConfirmModal
-        isOpen={isOpen}
-        toggleModal={() => setIsOpen(false)}
-        title="Rerun service"
-        message={`Do you want to trigger ${eventData.service} to run again for package ${eventData.identifier}?`}
-
-      /> */}
+      {eventData.error ? (
+        <>
+          <Alert message={eventData.error} />
+          <p className="mt-30">
+            No event data is available. See error message above.
+          </p>
+        </>
+      ) : (
+        <>
+          <div className="mb-50">
+            <OutcomeBadge outcome={eventData.outcome} />
+          </div>
+          <SummaryList
+            className="card card--container mb-30"
+            items={[
+              { label: "Package Identifier", value: eventData.identifier },
+              { label: "Service", value: eventData.service },
+              {
+                label: "Message",
+                value: `${eventData.message} ${eventData.traceback ? eventData.traceback : ""}`,
+              },
+            ]}
+          />
+          <Button
+            type="button"
+            color="blue"
+            size="md"
+            label="Rerun service"
+            // TODO: Implement modal open
+            // handleClick={ }
+          />
+          {/* TODO: Implement modal open */}
+          {/* <ConfirmModal
+            isOpen={isOpen}
+            toggleModal={() => setIsOpen(false)}
+            title="Rerun service"
+            message={`Do you want to trigger ${eventData.service} to run again for package ${eventData.identifier}?`}
+          /> */}
+        </>
+      )}
     </div>
   );
 }

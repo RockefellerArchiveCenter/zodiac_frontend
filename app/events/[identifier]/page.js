@@ -1,14 +1,9 @@
 import { fetchData } from "@/lib/fetchData";
 import Alert from "@/components/Alert";
-import Button from "@/components/Button";
-import ConfirmModal from "@/components/ConfirmModal";
+import RerunService from "@/components/RerunService";
 import OutcomeBadge from "@/components/OutcomeBadge";
 import SummaryList from "@/components/SummaryList";
 import Link from "next/link";
-
-// async function rerunService() {
-//   // TODO: Implement rerun service
-// }
 
 export const metadata = {
   title: "Event Details - Zodiac",
@@ -56,21 +51,9 @@ export default async function EventDetail({ params }) {
               },
             ]}
           />
-          <Button
-            type="button"
-            color="blue"
-            size="md"
-            label="Rerun service"
-            // TODO: Implement modal open
-            // handleClick={ }
-          />
-          {/* TODO: Implement modal open */}
-          {/* <ConfirmModal
-            isOpen={isOpen}
-            toggleModal={() => setIsOpen(false)}
-            title="Rerun service"
-            message={`Do you want to trigger ${eventData.service} to run again for package ${eventData.identifier}?`}
-          /> */}
+          {eventData.outcome == "FAILURE" && (
+            <RerunService eventData={eventData} />
+          )}
         </>
       )}
     </div>

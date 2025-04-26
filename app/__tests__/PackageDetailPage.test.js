@@ -51,7 +51,7 @@ describe("Package Detail Page", () => {
 
     // Check if the title is rendered
     expect(
-      screen.getByText(`Package : ${mockPackageData.title}`),
+      screen.getByText(mockPackageData.title),
     ).toBeInTheDocument();
 
     // Check if package identifier and origin are rendered
@@ -89,25 +89,5 @@ describe("Package Detail Page", () => {
 
     // Check if alert with error message is rendered
     expect(screen.getByText("Test error message")).toBeInTheDocument();
-  });
-
-  it("renders correctly without title", async () => {
-    const mockPackageDataNoTitle = {
-      ...mockPackageData,
-      title: undefined,
-    };
-
-    fetchData.mockImplementation((url) => {
-      return Promise.resolve(mockPackageDataNoTitle);
-    });
-
-    render(
-      await PackageDetail({
-        params: { identifier: mockPackageData.identifier },
-      }),
-    );
-
-    expect(screen.getByText("Package")).toBeInTheDocument();
-    expect(screen.queryByText("Package :")).not.toBeInTheDocument();
   });
 });

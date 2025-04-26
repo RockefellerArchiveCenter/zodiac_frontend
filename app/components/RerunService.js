@@ -5,9 +5,24 @@ import { useRouter } from "next/navigation";
 import Button from "@/components/Button";
 import ConfirmModal from "@/components/ConfirmModal";
 
-function rerunService(eventData) {
-  console.log(eventData);
-  // TODO: Implement rerun service
+function rerunService(service, package_id) {
+  const postData = {
+    service: service,
+    package_id: package_id,
+  };
+  fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/restart-service/`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(postData),
+  })
+    .then((data) => {
+      console.log("Success:", data);
+    })
+    .catch((error) => {
+      console.error("Error:", error);
+    });
 }
 
 const RerunService = ({ eventData }) => {
@@ -39,7 +54,7 @@ const RerunService = ({ eventData }) => {
               size="md"
               label="Run service"
               handleClick={() => {
-                rerunService(eventData);
+                rerunService(eventData.service, eventData.package_identifier);
                 router.push(`/packages/${eventData.package_identifier}`);
               }}
             />

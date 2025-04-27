@@ -17,7 +17,6 @@ const ConfirmModal = ({
 
   return (
     <Modal
-      appElement={appElement}
       isOpen={isOpen}
       onRequestClose={toggleModal}
       className={`modal ${className}`}

@@ -41,7 +41,7 @@ const RerunService = ({ eventData }) => {
       <ConfirmModal
         isOpen={isOpen}
         toggleModal={() => setIsOpen(false)}
-        title="Rerun service"
+        title={`Rerun ${eventData.service}`}
         content={
           <>
             <p>

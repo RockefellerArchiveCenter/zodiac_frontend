@@ -50,9 +50,7 @@ describe("Package Detail Page", () => {
     );
 
     // Check if the title is rendered
-    expect(
-      screen.getByText(mockPackageData.title),
-    ).toBeInTheDocument();
+    expect(screen.getByText(mockPackageData.title)).toBeInTheDocument();
 
     // Check if package identifier and origin are rendered
     expect(screen.getByText(mockPackageData.identifier)).toBeInTheDocument();

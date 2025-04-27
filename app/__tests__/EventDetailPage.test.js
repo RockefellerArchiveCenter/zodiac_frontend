@@ -7,12 +7,12 @@ import { fetchData } from "../lib/fetchData";
 jest.mock("../lib/fetchData");
 
 const mockEventData = {
-    identifier: "f78742e5-6af9-4756-a94a-6cd297406d55",
-    service: "test_service",
-    outcome: "SUCCESS",
-    last_modified: "2025-02-26T15:12:29.176000Z",
-    message: "Package discovered.",
-  }
+  identifier: "f78742e5-6af9-4756-a94a-6cd297406d55",
+  service: "test_service",
+  outcome: "SUCCESS",
+  last_modified: "2025-02-26T15:12:29.176000Z",
+  message: "Package discovered.",
+};
 
 describe("Event Detail Page", () => {
   beforeEach(() => {
@@ -31,9 +31,10 @@ describe("Event Detail Page", () => {
     );
 
     expect(screen.getByText(mockEventData.service)).toBeInTheDocument();
-    expect(screen.getByText(`STATUS: ${mockEventData.outcome}`)).toBeInTheDocument();
+    expect(
+      screen.getByText(`STATUS: ${mockEventData.outcome}`),
+    ).toBeInTheDocument();
     expect(screen.getByText(mockEventData.message)).toBeInTheDocument();
-
   });
 
   it("handles fetchData errors correctly", async () => {

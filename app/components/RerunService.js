@@ -33,8 +33,7 @@ const RerunService = ({ eventData }) => {
     <>
       <Button
         type="button"
-        color="blue"
-        size="md"
+        className="btn--blue btn--md"
         label="Rerun service"
         handleClick={() => setIsOpen(!isOpen)}
       />
@@ -50,8 +49,7 @@ const RerunService = ({ eventData }) => {
             </p>
             <Button
               type="button"
-              color="blue"
-              size="md"
+              className="btn--blue btn--md mr-20"
               label="Run service"
               handleClick={() => {
                 rerunService(eventData.service, eventData.package_identifier);
@@ -60,8 +58,7 @@ const RerunService = ({ eventData }) => {
             />
             <Button
               type="button"
-              color="orange"
-              size="md"
+              className="btn--orange btn--md"
               label="Cancel"
               handleClick={() => setIsOpen(!isOpen)}
             />

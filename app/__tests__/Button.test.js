@@ -7,8 +7,7 @@ describe("Button Component", () => {
     render(
       <Button
         type="submit"
-        color="blue"
-        size="md"
+        className="btn--blue btn--md"
         handleClick={jest.fn()}
         ariaLabel="Submit form"
         ariaHasPopup={false}

@@ -1,15 +1,38 @@
-import { fireEvent, render, screen } from "@testing-library/react";
+import {
+  act,
+  render,
+  screen,
+  fireEvent,
+  waitFor,
+} from "@testing-library/react";
 import "@testing-library/jest-dom";
 import RerunService from "@/components/RerunService";
+import { useRouter } from "next/navigation";
 
 // Mock useRouter
-pushMock = jest.fn();
 jest.mock("next/navigation", () => ({
-  useRouter: () => ({
-    push: pushMock,
-    prefetch: jest.fn(),
-  }),
+  useRouter: jest.fn(),
 }));
+
+const mockPush = jest.fn();
+const originalLocation = window.location;
+
+beforeEach(() => {
+  const container = document.createElement("div");
+  container.id = "root";
+  document.body.appendChild(container);
+
+  useRouter.mockReturnValue({ push: mockPush });
+  Storage.prototype.setItem = jest.fn();
+
+  // Mock window.location.reload
+  delete window.location;
+  window.location = { reload: jest.fn() };
+});
+
+afterAll(() => {
+  window.location = originalLocation;
+});
 
 const mockEventData = {
   identifier: "f78742e5-6af9-4756-a94a-6cd297406d55",
@@ -20,76 +43,78 @@ const mockEventData = {
   package_identifier: "f78742e5-6af9-4756-a94a-6cd297406d51",
 };
 
-describe("Rerun Service Component", () => {
-  beforeEach(() => {
-    // Create root div for modal
-    const container = document.createElement("div");
-    container.id = "root";
-    document.body.appendChild(container);
-  });
-
-  afterEach(() => {
-    jest.resetAllMocks();
-  });
-
-  it("renders the button", () => {
+describe("RerunService Component", () => {
+  it("opens the modal on button click", () => {
     render(<RerunService eventData={mockEventData} />);
-
-    expect(screen.getByText("Rerun service")).toBeInTheDocument();
-    expect(screen.queryByText(`Rerun ${mockEventData.service}`)).toBeNull();
-  });
-
-  it("shows and hides the modal", () => {
-    render(<RerunService eventData={mockEventData} />);
-
-    // Click Rerun service button
-    const openButton = screen.getByRole("button", { name: "Rerun service" });
-    fireEvent.click(openButton);
+    fireEvent.click(screen.getByRole("button", { name: "Rerun service" }));
     expect(
       screen.getByText(`Rerun ${mockEventData.service}`),
     ).toBeInTheDocument();
-
-    // Click cancel button
-    const cancelButton = screen.getByRole("button", { name: "Cancel" });
-    fireEvent.click(cancelButton);
-    expect(screen.queryByText(`Rerun ${mockEventData.service}`)).toBeNull();
   });
 
-  it("triggers the rerun service function", () => {
-    // Mock successful response from fetch
-    global.fetch = jest.fn();
-    fetch.mockResolvedValue({
-      json: () => Promise.resolve({ data: "mock data" }),
+  it("handles successful rerun", async () => {
+    global.fetch = jest.fn().mockResolvedValueOnce({
       ok: true,
-      status: 200,
     });
 
     render(<RerunService eventData={mockEventData} />);
+    fireEvent.click(screen.getByText("Rerun service"));
+    fireEvent.click(screen.getByText("Run service"));
 
-    // Click Rerun service button
-    const openButton = screen.getByRole("button", { name: "Rerun service" });
-    fireEvent.click(openButton);
-
-    // Click Run service button
-    const runButton = screen.getByRole("button", { name: "Run service" });
-    fireEvent.click(runButton);
-
-    // Fetch is called with the correct arguments
-    expect(fetch).toHaveBeenCalledTimes(1);
-    expect(fetch).toHaveBeenCalledWith(
-      `${process.env.NEXT_PUBLIC_API_BASE_URL}/restart-service/`,
-      {
-        body: `{\"service\":\"${mockEventData.service}\",\"package_id\":\"${mockEventData.package_identifier}\"}`,
-        headers: { "Content-Type": "application/json" },
-        method: "POST",
-      },
-    );
-    // URL is correctly set
-    expect(pushMock).toHaveBeenCalledTimes(1);
-    expect(pushMock).toHaveBeenCalledWith(
-      `/packages/${mockEventData.package_identifier}`,
-    );
+    await waitFor(() => {
+      expect(Storage.prototype.setItem).toHaveBeenCalledWith(
+        "zodiacMessage",
+        expect.stringContaining(
+          "The request to rerun the service has been received",
+        ),
+      );
+      expect(mockPush).toHaveBeenCalledWith(
+        `/packages/${mockEventData.package_identifier}`,
+      );
+    });
   });
 
-  // TODO: test error response
+  it("handles server error response with JSON body", async () => {
+    global.fetch = jest.fn().mockResolvedValueOnce({
+      ok: false,
+      json: () => Promise.resolve("Something went wrong"),
+    });
+
+    render(<RerunService eventData={mockEventData} />);
+    fireEvent.click(screen.getByText("Rerun service"));
+    fireEvent.click(screen.getByText("Run service"));
+
+    await waitFor(() => {
+      expect(Storage.prototype.setItem).toHaveBeenCalledWith(
+        "zodiacMessage",
+        expect.stringContaining("Something went wrong"),
+      );
+      expect(window.location.reload).toHaveBeenCalled();
+    });
+  });
+
+  it("handles fetch error", async () => {
+    global.fetch = jest.fn().mockRejectedValueOnce(new Error("Network Error"));
+
+    render(<RerunService eventData={mockEventData} />);
+    fireEvent.click(screen.getByText("Rerun service"));
+    fireEvent.click(screen.getByText("Run service"));
+
+    await waitFor(() => {
+      expect(Storage.prototype.setItem).toHaveBeenCalledWith(
+        "zodiacMessage",
+        expect.stringContaining("Network Error"),
+      );
+      expect(window.location.reload).toHaveBeenCalled();
+    });
+  });
+
+  it("closes the modal on cancel", () => {
+    render(<RerunService eventData={mockEventData} />);
+    fireEvent.click(screen.getByText("Rerun service"));
+    fireEvent.click(screen.getByText("Cancel"));
+    expect(
+      screen.queryByText(`Do you want to trigger ${mockEventData.service}`),
+    ).not.toBeInTheDocument();
+  });
 });

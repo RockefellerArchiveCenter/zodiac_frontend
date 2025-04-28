@@ -1,5 +1,6 @@
 import { fetchData } from "@/lib/fetchData";
 import Alert from "@/components/Alert";
+import LocalStorageAlert from "@/components/LocalStorageAlert";
 import OutcomeBadge from "@/components/OutcomeBadge";
 import SummaryList from "@/components/SummaryList";
 import Table from "@/components/Table";
@@ -36,6 +37,8 @@ export default async function PackageDetail({ params }) {
   return (
     <div>
       <h1>Package Details</h1>
+
+      <LocalStorageAlert />
 
       {error ? (
         <>

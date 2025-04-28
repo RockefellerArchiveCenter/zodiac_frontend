@@ -1,5 +1,6 @@
 import { fetchData } from "@/lib/fetchData";
 import Alert from "@/components/Alert";
+import LocalStorageAlert from "@/components/LocalStorageAlert";
 import RerunService from "@/components/RerunService";
 import OutcomeBadge from "@/components/OutcomeBadge";
 import SummaryList from "@/components/SummaryList";
@@ -16,6 +17,8 @@ export default async function EventDetail({ params }) {
   return (
     <div>
       <h1>Event Details</h1>
+
+      <LocalStorageAlert />
 
       {eventData.error ? (
         <>

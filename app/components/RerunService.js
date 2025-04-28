@@ -2,10 +2,21 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import Button from "@/components/Button";
-import ConfirmModal from "@/components/ConfirmModal";
+import Button from "./Button";
+import ConfirmModal from "./ConfirmModal";
 
-function rerunService(service, package_id) {
+export function setLocalStorage(message, color, icon) {
+  localStorage.setItem(
+    "zodiacMessage",
+    JSON.stringify({
+      message: message,
+      color: color,
+      icon: icon,
+    }),
+  );
+}
+
+export function rerunService(service, package_id, router) {
   const postData = {
     service: service,
     package_id: package_id,
@@ -17,11 +28,38 @@ function rerunService(service, package_id) {
     },
     body: JSON.stringify(postData),
   })
-    .then((data) => {
-      console.log("Success:", data);
+    .then((resp) => {
+      if (resp.ok) {
+        setLocalStorage(
+          "The request to rerun the service has been received. It may take a few minutes for a notification from this service to appear. Please refresh the page for status updates",
+          "blue",
+          "check_circle_outline",
+        );
+        router.push(`/packages/${package_id}`);
+      } else {
+        resp.json().then((data) => {
+          localStorage.setItem(
+            "zodiacMessage",
+            JSON.stringify({
+              message: data,
+              color: "orange",
+              icon: "error_outline",
+            }),
+          );
+          window.location.reload();
+        });
+      }
     })
     .catch((error) => {
-      console.error("Error:", error);
+      localStorage.setItem(
+        "zodiacMessage",
+        JSON.stringify({
+          message: String(error),
+          color: "orange",
+          icon: "error_outline",
+        }),
+      );
+      window.location.reload();
     });
 }
 
@@ -52,8 +90,11 @@ const RerunService = ({ eventData }) => {
               className="btn--blue btn--md mr-20"
               label="Run service"
               handleClick={() => {
-                rerunService(eventData.service, eventData.package_identifier);
-                router.push(`/packages/${eventData.package_identifier}`);
+                rerunService(
+                  eventData.service,
+                  eventData.package_identifier,
+                  router,
+                );
               }}
             />
             <Button

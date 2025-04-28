@@ -29,9 +29,7 @@ const ConfirmModal = ({
           aria-label="Close"
           onClick={toggleModal}
         >
-          <span className="modal__icon" aria-hidden="true">
-            icon_close
-          </span>
+         <span class="material-icon" aria-hidden="true">close</span>
         </button>
       </div>
       <div className="modal__body">{content}</div>

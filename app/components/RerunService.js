@@ -82,6 +82,7 @@ const RerunService = ({ eventData }) => {
         handleClick={() => setIsOpen(!isOpen)}
       />
       <ConfirmModal
+        className="modal--sm"
         isOpen={isOpen}
         toggleModal={() => setIsOpen(false)}
         title={`Rerun ${eventData.service}`}
@@ -89,26 +90,28 @@ const RerunService = ({ eventData }) => {
           <>
             <p>
               Do you want to trigger {eventData.service} to run again for
-              package {eventData.identifier}?
+              package with identifier {eventData.identifier}?
             </p>
-            <Button
-              type="button"
-              className="btn--blue btn--md mr-20"
-              label="Run service"
-              handleClick={() => {
-                rerunService(
-                  eventData.service,
-                  eventData.package_identifier,
-                  router,
-                );
-              }}
-            />
-            <Button
-              type="button"
-              className="btn--orange btn--md"
-              label="Cancel"
-              handleClick={() => setIsOpen(!isOpen)}
-            />
+            <div className="mt-20">
+              <Button
+                type="button"
+                className="btn--blue btn--sm mr-10"
+                label="Run service"
+                handleClick={() => {
+                  rerunService(
+                    eventData.service,
+                    eventData.package_identifier,
+                    router,
+                  );
+                }}
+              />
+              <Button
+                type="button"
+                className="btn--gray btn--sm"
+                label="Cancel"
+                handleClick={() => setIsOpen(!isOpen)}
+              />
+            </div>
           </>
         }
       />

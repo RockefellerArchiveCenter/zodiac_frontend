@@ -31,3 +31,12 @@
     content: '...';
   }
 }
+
+.modal--sm {
+	@media screen and (min-width: 1024px) {
+		left: 30%;
+		right: 30%;
+		top: 30%;
+		bottom: 30%;
+	}
+}

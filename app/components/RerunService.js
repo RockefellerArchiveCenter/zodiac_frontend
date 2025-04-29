@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import Button from "./Button";
 import ConfirmModal from "./ConfirmModal";
 
+// Sets a message in localStorage to be displayed as an alert.
 export function setLocalStorage(message, color, icon) {
   localStorage.setItem(
     "zodiacMessage",
@@ -16,6 +17,7 @@ export function setLocalStorage(message, color, icon) {
   );
 }
 
+// Sends a post request to restart a service for a specific package.
 export function rerunService(service, package_id, router) {
   const postData = {
     service: service,
@@ -28,6 +30,7 @@ export function rerunService(service, package_id, router) {
     },
     body: JSON.stringify(postData),
   })
+    // If the request is successful, sets a success message in localStorage and redirects to the package page.
     .then((resp) => {
       if (resp.ok) {
         setLocalStorage(
@@ -36,6 +39,7 @@ export function rerunService(service, package_id, router) {
           "check_circle_outline",
         );
         router.push(`/packages/${package_id}`);
+        // If the request fails, sets an error message in localStorage and reloads the page.
       } else {
         resp.json().then((data) => {
           localStorage.setItem(
@@ -50,6 +54,7 @@ export function rerunService(service, package_id, router) {
         });
       }
     })
+    // If there is a network error, sets an error message in localStorage and reloads the page.
     .catch((error) => {
       localStorage.setItem(
         "zodiacMessage",
@@ -63,6 +68,7 @@ export function rerunService(service, package_id, router) {
     });
 }
 
+// RerunService component renders a button that opens a modal to confirm the rerun of a service.
 const RerunService = ({ eventData }) => {
   const [isOpen, setIsOpen] = useState(false);
   const router = useRouter();

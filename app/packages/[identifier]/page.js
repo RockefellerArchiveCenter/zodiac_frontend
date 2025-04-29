@@ -1,5 +1,6 @@
 import { fetchData } from "@/lib/fetchData";
 import Alert from "@/components/Alert";
+import LocalStorageAlert from "@/components/LocalStorageAlert";
 import OutcomeBadge from "@/components/OutcomeBadge";
 import SummaryList from "@/components/SummaryList";
 import Table from "@/components/Table";
@@ -35,46 +36,61 @@ export default async function PackageDetail({ params }) {
 
   return (
     <div>
-      {error && <Alert message={error} />}
+      <h1>Package Details</h1>
 
-      <h1>Package {packageData.title ? `: ${packageData.title}` : ""}</h1>
+      <LocalStorageAlert />
 
-      <div className="mb-50">
-        <OutcomeBadge outcome={outcome} />
-      </div>
-      <SummaryList
-        className="mb-50"
-        items={[
-          { label: "Package Identifier", value: packageData.identifier },
-          { label: "Package Origin", value: packageData.origin },
-        ]}
-      />
+      {error ? (
+        <>
+          <Alert message={error} />
+          <p className="mt-30">
+            No package data is available. See error message above.
+          </p>
+        </>
+      ) : (
+        <>
+          <div className="mb-50">
+            <OutcomeBadge outcome={outcome} />
+          </div>
+          <SummaryList
+            className="mb-50"
+            items={[
+              { label: "Package Title", value: packageData.title },
+              { label: "Package Identifier", value: packageData.identifier },
+              { label: "Package Origin", value: packageData.origin },
+            ]}
+          />
 
-      <h2>Package Events</h2>
-      <div className="mb-50">
-        <Table columnsConfig={columnsConfig} data={eventsData} />
-      </div>
+          <h2>Package Events</h2>
+          <div className="mb-50">
+            <Table columnsConfig={columnsConfig} data={eventsData} />
+          </div>
 
-      <SummaryList
-        className="card card--container mb-50"
-        title="External Identifiers"
-        items={[
-          { label: "Aurora Transfer", value: identifiers.aurora_package },
-          { label: "Aurora Accession", value: identifiers.aurora_accession },
-          {
-            label: "Archivematica AIP UUID",
-            value: identifiers.archivematica_uuid,
-          },
-          {
-            label: "ArchivesSpace Accession",
-            value: identifiers.archivesspace_accession,
-          },
-          {
-            label: "ArchivesSpace Archival Object",
-            value: identifiers.archivesspace_archival_object,
-          },
-        ]}
-      />
+          <SummaryList
+            className="card card--container mb-50"
+            title="External Identifiers"
+            items={[
+              { label: "Aurora Transfer", value: identifiers.aurora_package },
+              {
+                label: "Aurora Accession",
+                value: identifiers.aurora_accession,
+              },
+              {
+                label: "Archivematica AIP UUID",
+                value: identifiers.archivematica_uuid,
+              },
+              {
+                label: "ArchivesSpace Accession",
+                value: identifiers.archivesspace_accession,
+              },
+              {
+                label: "ArchivesSpace Archival Object",
+                value: identifiers.archivesspace_archival_object,
+              },
+            ]}
+          />
+        </>
+      )}
     </div>
   );
 }

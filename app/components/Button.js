@@ -1,7 +1,7 @@
 const Button = (props) => (
   <button
     type={props.type}
-    className={`btn btn--${props.color} btn--${props.size}`}
+    className={`btn ${props.className}`}
     onClick={props.handleClick}
     aria-label={props.ariaLabel}
     aria-haspopup={props.ariaHasPopup}

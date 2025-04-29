@@ -42,28 +42,14 @@ export function rerunService(service, package_id, router) {
         // If the request fails, sets an error message in localStorage and reloads the page.
       } else {
         resp.json().then((data) => {
-          localStorage.setItem(
-            "zodiacMessage",
-            JSON.stringify({
-              message: data,
-              color: "orange",
-              icon: "error_outline",
-            }),
-          );
+          setLocalStorage(data, "orange", "error_outline");
           window.location.reload();
         });
       }
     })
     // If there is a network error, sets an error message in localStorage and reloads the page.
     .catch((error) => {
-      localStorage.setItem(
-        "zodiacMessage",
-        JSON.stringify({
-          message: String(error),
-          color: "orange",
-          icon: "error_outline",
-        }),
-      );
+      setLocalStorage(String(error), "orange", "error_outline");
       window.location.reload();
     });
 }

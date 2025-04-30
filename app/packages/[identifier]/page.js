@@ -63,7 +63,10 @@ export default async function PackageDetail({ params }) {
 
           <h2>Package Events</h2>
           <div className="mb-50">
-            <Table columnsConfig={columnsConfig} data={eventsData} />
+            <Table
+              apiPath={`/packages/${identifier}/events`}
+              columnsConfig={columnsConfig}
+            />
           </div>
 
           <SummaryList

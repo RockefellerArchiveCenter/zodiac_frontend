@@ -20,7 +20,13 @@ const DataTable = dynamic(
   },
 );
 
-export default function Table({ data, columnsConfig }) {
+export default function Table({ apiPath, columnsConfig }) {
+  const baseURL = process.env.NEXT_PUBLIC_API_BASE_URL; // API base URL from .env file
+  const apiUrl = new URL(
+    `${baseURL.replace(/\/$/, "")}/${apiPath.replace(/^\/+/, "")}`,
+  ); // Construct full URL path
+  apiUrl.searchParams.append("format", "datatables"); // Adding datables format parameter to existing search params
+
   const columns = columnsConfig.map((col) => {
     if (col.type === "link") {
       // Add ability to specify link in column data
@@ -38,11 +44,13 @@ export default function Table({ data, columnsConfig }) {
   return (
     <DataTable
       columns={columns}
-      data={data}
+      data={[]}
       className="table table-striped"
       options={{
         processing: true,
         paging: true,
+        serverSide: true,
+        ajax: apiUrl.href,
         searching: true,
         ordering: true,
         lengthMenu: [10, 25, 50, 100],

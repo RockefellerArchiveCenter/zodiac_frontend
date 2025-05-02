@@ -10,6 +10,7 @@ const mockPackageData = {
   identifier: "f78742e5-6af9-4756-a94a-6cd297406d51",
   title: "Test Package",
   origin: "aurora",
+  last_outcome: "SUCCESS",
   identifiers: {
     aurora_package:
       "https://aurora.dev.rockarch.org/api/transfers/1631/?format=json",
@@ -20,26 +21,13 @@ const mockPackageData = {
   },
 };
 
-const mockEventsData = [
-  {
-    identifier: "f78742e5-6af9-4756-a94a-6cd297406d55",
-    service: "test_service",
-    outcome: "SUCCESS",
-    last_modified: "2025-02-26T15:12:29.176000Z",
-    message: "Package discovered.",
-  },
-];
-
 describe("Package Detail Page", () => {
   beforeEach(() => {
     jest.clearAllMocks();
   });
 
   it("renders package detail page", async () => {
-    fetchData.mockImplementation((url) => {
-      if (url.includes("/events")) {
-        return Promise.resolve(mockEventsData);
-      }
+    fetchData.mockImplementation(() => {
       return Promise.resolve(mockPackageData);
     });
 
@@ -55,6 +43,9 @@ describe("Package Detail Page", () => {
     // Check if package identifier and origin are rendered
     expect(screen.getByText(mockPackageData.identifier)).toBeInTheDocument();
     expect(screen.getByText(mockPackageData.origin)).toBeInTheDocument();
+
+    // Check if outcome is rendered
+    expect(screen.getByText(`STATUS: ${mockPackageData.last_outcome}`)).toBeInTheDocument();
 
     // Check if external identifiers are rendered (or "None" if undefined)
     expect(

@@ -10,7 +10,7 @@ export function constructUrl(path) {
     `${baseURL.replace(/\/$/, "")}/${path.replace(/^\/+/, "")}`,
   ); // Construct full URL path
   apiUrl.searchParams.append("format", "datatables"); // Adding datables format parameter to existing search params
-  return apiUrl.href
+  return apiUrl.href;
 }
 
 // Construct columns fron configuration
@@ -48,8 +48,8 @@ const DataTable = dynamic(
 );
 
 export default function Table({ apiPath, columnsConfig }) {
-  const apiUrl = constructUrl(apiPath)
-  const columns = constructColumns(columnsConfig)
+  const apiUrl = constructUrl(apiPath);
+  const columns = constructColumns(columnsConfig);
 
   return (
     <DataTable

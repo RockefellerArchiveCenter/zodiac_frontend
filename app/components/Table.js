@@ -3,6 +3,33 @@
 import dynamic from "next/dynamic";
 import "datatables.net-dt/css/dataTables.dataTables.css";
 
+// Construct fully qualified datatables URL
+export function constructUrl(path) {
+  const baseURL = process.env.NEXT_PUBLIC_API_BASE_URL; // API base URL from .env file
+  const apiUrl = new URL(
+    `${baseURL.replace(/\/$/, "")}/${path.replace(/^\/+/, "")}`,
+  ); // Construct full URL path
+  apiUrl.searchParams.append("format", "datatables"); // Adding datables format parameter to existing search params
+  return apiUrl.href
+}
+
+// Construct columns fron configuration
+export function constructColumns(columnsConfig) {
+  return columnsConfig.map((col) => {
+    if (col.type === "link") {
+      // Add ability to specify link in column data
+      return {
+        ...col,
+        render: (data, type, row) => {
+          const identifier = row[col.identifierKey];
+          return `<a href="${col.linkPrefix}${identifier}">${data}</a>`;
+        },
+      };
+    }
+    return col;
+  });
+}
+
 // Dynamic import of DataTable component (see https://datatables.net/forums/discussion/79941/)
 const DataTable = dynamic(
   async () => {
@@ -21,25 +48,8 @@ const DataTable = dynamic(
 );
 
 export default function Table({ apiPath, columnsConfig }) {
-  const baseURL = process.env.NEXT_PUBLIC_API_BASE_URL; // API base URL from .env file
-  const apiUrl = new URL(
-    `${baseURL.replace(/\/$/, "")}/${apiPath.replace(/^\/+/, "")}`,
-  ); // Construct full URL path
-  apiUrl.searchParams.append("format", "datatables"); // Adding datables format parameter to existing search params
-
-  const columns = columnsConfig.map((col) => {
-    if (col.type === "link") {
-      // Add ability to specify link in column data
-      return {
-        ...col,
-        render: (data, type, row) => {
-          const identifier = row[col.identifierKey];
-          return `<a href="${col.linkPrefix}${identifier}">${data}</a>`;
-        },
-      };
-    }
-    return col;
-  });
+  const apiUrl = constructUrl(apiPath)
+  const columns = constructColumns(columnsConfig)
 
   return (
     <DataTable
@@ -50,7 +60,7 @@ export default function Table({ apiPath, columnsConfig }) {
         processing: true,
         paging: true,
         serverSide: true,
-        ajax: apiUrl.href,
+        ajax: apiUrl,
         searching: true,
         ordering: true,
         lengthMenu: [10, 25, 50, 100],

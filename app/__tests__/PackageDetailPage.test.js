@@ -3,8 +3,8 @@ import "@testing-library/jest-dom";
 import PackageDetail from "../packages/[identifier]/page";
 import { fetchData } from "../lib/fetchData";
 
-// Mock the fetchData function
-jest.mock("../lib/fetchData");
+jest.mock("../lib/fetchData"); // Mock the fetchData function
+jest.mock("../components/Table"); // Mock the Table component, tested elsewhere
 
 const mockPackageData = {
   identifier: "f78742e5-6af9-4756-a94a-6cd297406d51",
@@ -55,13 +55,6 @@ describe("Package Detail Page", () => {
     // Check if package identifier and origin are rendered
     expect(screen.getByText(mockPackageData.identifier)).toBeInTheDocument();
     expect(screen.getByText(mockPackageData.origin)).toBeInTheDocument();
-
-    // Wait for datatables to load content and check if the content is rendered
-    await waitFor(() => {
-      expect(screen.getByText(mockEventsData[0].service)).toBeInTheDocument();
-      expect(screen.getByText(mockEventsData[0].outcome)).toBeInTheDocument();
-      expect(screen.getByText(mockEventsData[0].message)).toBeInTheDocument();
-    });
 
     // Check if external identifiers are rendered (or "None" if undefined)
     expect(

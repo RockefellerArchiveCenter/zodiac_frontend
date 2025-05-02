@@ -45,7 +45,9 @@ describe("Package Detail Page", () => {
     expect(screen.getByText(mockPackageData.origin)).toBeInTheDocument();
 
     // Check if outcome is rendered
-    expect(screen.getByText(`STATUS: ${mockPackageData.last_outcome}`)).toBeInTheDocument();
+    expect(
+      screen.getByText(`STATUS: ${mockPackageData.last_outcome}`),
+    ).toBeInTheDocument();
 
     // Check if external identifiers are rendered (or "None" if undefined)
     expect(

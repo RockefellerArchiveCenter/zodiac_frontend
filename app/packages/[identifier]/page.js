@@ -11,7 +11,7 @@ export const metadata = {
 
 export default async function PackageDetail({ params }) {
   const { identifier } = await params;
-  const packageData = await fetchData(`/packages/${identifier}`)
+  const packageData = await fetchData(`/packages/${identifier}`);
   const error = packageData.error;
   const identifiers = packageData.identifiers || {};
 

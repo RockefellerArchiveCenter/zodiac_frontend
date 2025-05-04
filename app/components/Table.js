@@ -1,7 +1,9 @@
 "use client";
 
+import { useState } from "react";
 import dynamic from "next/dynamic";
 import "datatables.net-dt/css/dataTables.dataTables.css";
+import Alert from "./Alert";
 
 // Construct fully qualified datatables URL
 export function constructUrl(path) {
@@ -50,8 +52,11 @@ const DataTable = dynamic(
 export default function Table({ apiPath, columnsConfig }) {
   const apiUrl = constructUrl(apiPath);
   const columns = constructColumns(columnsConfig);
+  const [error, setError] = useState("");
 
-  return (
+  return error ? (
+    <Alert message={error} />
+  ) : (
     <DataTable
       columns={columns}
       data={[]}
@@ -60,7 +65,20 @@ export default function Table({ apiPath, columnsConfig }) {
         processing: true,
         paging: true,
         serverSide: true,
-        ajax: apiUrl,
+        ajax: {
+          url: apiUrl,
+          error: (jqXHR, textStatus, errorThrown) => {
+            if (jqXHR.status == 0) {
+              setError(
+                `Could not fetch data from ${apiUrl}. Network error, check connection.`,
+              );
+            } else {
+              setError(
+                `Could not fetch data from ${apiUrl}. ${jqXHR.status}: ${errorThrown}`,
+              );
+            }
+          },
+        },
         searching: true,
         ordering: true,
         lengthMenu: [10, 25, 50, 100],

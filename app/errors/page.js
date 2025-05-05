@@ -1,6 +1,4 @@
 // /errors page
-import { fetchData } from "@/lib/fetchData";
-import Alert from "@/components/Alert";
 import Table from "@/components/Table";
 
 export const metadata = {
@@ -8,17 +6,21 @@ export const metadata = {
 };
 
 export default async function Errors() {
-  const data = await fetchData("/events?outcome=FAILURE");
   const columnsConfig = [
     {
       title: "Title",
       data: "package_title",
+      name: "package_identifier.title",
       type: "link",
       linkPrefix: "/packages/",
       identifierKey: "package_identifier",
     },
     { title: "Package ID", data: "package_identifier" },
-    { title: "Origin", data: "package_origin" },
+    {
+      title: "Origin",
+      data: "package_origin",
+      name: "package_identifier.origin",
+    },
     {
       title: "Service Error",
       data: "message",
@@ -31,9 +33,8 @@ export default async function Errors() {
 
   return (
     <div>
-      {data.error && <Alert message={data.error} />}
       <h1>Package Errors</h1>
-      <Table columnsConfig={columnsConfig} data={data} />
+      <Table apiPath="/events?outcome=FAILURE" columnsConfig={columnsConfig} />
     </div>
   );
 }

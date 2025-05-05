@@ -1,46 +1,41 @@
-import preloadAll from "jest-next-dynamic";
-import { render, screen } from "@testing-library/react";
+import { constructColumns, constructUrl } from "@/components/Table";
 import "@testing-library/jest-dom";
-import Table from "../components/Table";
 
-beforeAll(async () => {
-  await preloadAll();
-});
-
-describe("Table Component", () => {
-  // Test if the table renders columns and data
-  it("renders the table", () => {
+describe("Construct columns function", () => {
+  it("correctly creates basic cell", () => {
     const columnsConfig = [{ title: "Package ID", data: "identifier" }];
-    const data = [{ identifier: "8bf992c0-1547-403a-93d4-ac531e7ed080" }];
-
-    render(<Table columnsConfig={columnsConfig} data={data} />);
-
-    expect(screen.getByText("Package ID")).toBeInTheDocument();
-    expect(
-      screen.getByText("8bf992c0-1547-403a-93d4-ac531e7ed080"),
-    ).toBeInTheDocument(); // Data cell
+    const output = constructColumns(columnsConfig);
+    expect(output).toStrictEqual(columnsConfig);
   });
 
-  it("renders links in cells", () => {
-    // Test if the table correctly creates links when desired.
+  it("correctly creates link cell", () => {
     const columnsConfig = [
       {
-        title: "Package ID",
-        data: "identifier",
+        title: "Title",
+        data: "title",
         type: "link",
-        linkPrefix: "/objects/",
+        linkPrefix: "/packages/",
         identifierKey: "identifier",
       },
     ];
-    const data = [{ identifier: "8bf992c0-1547-403a-93d4-ac531e7ed080" }];
+    const output = constructColumns(columnsConfig);
+    expect(output[0]).toEqual(expect.objectContaining(columnsConfig[0]));
+    expect(output[0].render).toStrictEqual(expect.any(Function));
+  });
+});
 
-    render(<Table columnsConfig={columnsConfig} data={data} />);
+describe("Construct URL function", () => {
+  it("correctly creates search params", () => {
+    const output = constructUrl("packages");
+    expect(output).toBe(
+      `${process.env.NEXT_PUBLIC_API_BASE_URL.replace(/\/$/, "")}/packages?format=datatables`,
+    );
+  });
 
-    expect(
-      screen.getByText("8bf992c0-1547-403a-93d4-ac531e7ed080"),
-    ).toHaveAttribute("href");
-    expect(screen.getByText("8bf992c0-1547-403a-93d4-ac531e7ed080").href).toBe(
-      "http://localhost/objects/8bf992c0-1547-403a-93d4-ac531e7ed080",
+  it("correctly adds to existing search params", () => {
+    const output = constructUrl("packages?outcome=SUCCESS");
+    expect(output).toBe(
+      `${process.env.NEXT_PUBLIC_API_BASE_URL.replace(/\/$/, "")}/packages?outcome=SUCCESS&format=datatables`,
     );
   });
 });

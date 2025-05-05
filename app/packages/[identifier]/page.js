@@ -11,14 +11,8 @@ export const metadata = {
 
 export default async function PackageDetail({ params }) {
   const { identifier } = await params;
-
-  const [eventsData, packageData] = await Promise.all([
-    fetchData(`/packages/${identifier}/events`),
-    fetchData(`/packages/${identifier}`),
-  ]);
-
-  const error = eventsData.error || packageData.error;
-  const outcome = eventsData[0]?.outcome; // Get the most recent event outcome for the package
+  const packageData = await fetchData(`/packages/${identifier}`);
+  const error = packageData.error;
   const identifiers = packageData.identifiers || {};
 
   const columnsConfig = [
@@ -50,7 +44,7 @@ export default async function PackageDetail({ params }) {
       ) : (
         <>
           <div className="mb-50">
-            <OutcomeBadge outcome={outcome} />
+            <OutcomeBadge outcome={packageData.last_outcome} />
           </div>
           <SummaryList
             className="mb-50"
@@ -63,7 +57,10 @@ export default async function PackageDetail({ params }) {
 
           <h2>Package Events</h2>
           <div className="mb-50">
-            <Table columnsConfig={columnsConfig} data={eventsData} />
+            <Table
+              apiPath={`/packages/${identifier}/events`}
+              columnsConfig={columnsConfig}
+            />
           </div>
 
           <SummaryList

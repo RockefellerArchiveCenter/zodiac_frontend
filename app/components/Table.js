@@ -2,7 +2,6 @@
 
 import { useState } from "react";
 import dynamic from "next/dynamic";
-import "datatables.net-dt/css/dataTables.dataTables.css";
 import Alert from "./Alert";
 
 // Construct fully qualified datatables URL

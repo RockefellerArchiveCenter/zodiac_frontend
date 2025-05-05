@@ -1,3 +1,4 @@
+import "datatables.net-dt/css/dataTables.dataTables.css";
 import "./globals.css";
 import Link from "next/link";
 

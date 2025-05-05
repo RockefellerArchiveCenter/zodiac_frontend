@@ -32,7 +32,7 @@ describe("Construct URL function", () => {
     );
   });
 
-  it("correctly adds to exisitng search params", () => {
+  it("correctly adds to existing search params", () => {
     const output = constructUrl("packages?outcome=SUCCESS");
     expect(output).toBe(
       `${process.env.NEXT_PUBLIC_API_BASE_URL.replace(/\/$/, "")}/packages?outcome=SUCCESS&format=datatables`,

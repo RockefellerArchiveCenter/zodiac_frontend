@@ -18,7 +18,9 @@ export default async function EventDetail({ params }) {
     <div>
       <h1>Event Details</h1>
 
-      <LocalStorageAlert />
+      <div role="status">
+        <LocalStorageAlert />
+      </div>
 
       {eventData.error ? (
         <>

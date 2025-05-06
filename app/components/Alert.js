@@ -1,5 +1,5 @@
 const Alert = ({ color = "orange", icon = "error_outline", message }) => (
-  <div className={`alert alert--${color}`} role="status">
+  <div className={`alert alert--${color}`}>
     <span className="alert__icon" aria-hidden="true">
       {icon}
     </span>

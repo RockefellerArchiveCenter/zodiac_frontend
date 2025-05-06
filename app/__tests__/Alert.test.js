@@ -10,6 +10,6 @@ describe("Alert Component", () => {
     expect(screen.getByText("error_outline")).toBeInTheDocument(); // icon
     expect(screen.getByText("error_outline").parentElement).toHaveClass(
       "alert alert--orange",
-    ); // alert div
+    );
   });
 });

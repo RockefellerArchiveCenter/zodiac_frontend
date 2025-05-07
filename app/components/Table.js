@@ -10,11 +10,11 @@ export function constructUrl(path) {
   const apiUrl = new URL(
     `${baseURL.replace(/\/$/, "")}/${path.replace(/^\/+/, "")}`,
   ); // Construct full URL path
-  apiUrl.searchParams.append("format", "datatables"); // Adding datables format parameter to existing search params
+  apiUrl.searchParams.append("format", "datatables"); // Add datatables format parameter to existing search params
   return apiUrl.href;
 }
 
-// Construct columns fron configuration
+// Construct columns from configuration
 export function constructColumns(columnsConfig) {
   return columnsConfig.map((col) => {
     if (col.type === "link") {

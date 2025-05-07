@@ -1,7 +1,7 @@
 import "datatables.net-dt/css/dataTables.dataTables.css";
 import "./globals.css";
 import Link from "next/link";
-import Script from "next/script";
+import MatomoTagManager from "./components/MatomoTagManager";
 
 export const metadata = {
   title: "Zodiac",
@@ -13,16 +13,7 @@ export default function Template({ children }) {
   return (
     <html lang="en">
       <head>
-        <Script id="matomo-tag-manager">
-          {`
-            var _mtm = window._mtm = window._mtm || [];
-            _mtm.push({'mtm.startTime': (new Date().getTime()), 'event': 'mtm.Start'});
-            (function() {
-              var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
-              g.async=true; g.src='https://cdn.matomo.cloud/rockarch.matomo.cloud/container_cDPJweu4.js'; s.parentNode.insertBefore(g,s);
-            })();
-          `}
-        </Script>
+        <MatomoTagManager />
       </head>
       <body>
         <div id="root">

@@ -1,6 +1,7 @@
 import "datatables.net-dt/css/dataTables.dataTables.css";
 import "./globals.css";
 import Link from "next/link";
+import MatomoTagManager from "./components/MatomoTagManager";
 
 export const metadata = {
   title: "Zodiac",
@@ -11,6 +12,9 @@ export const metadata = {
 export default function Template({ children }) {
   return (
     <html lang="en">
+      <head>
+        <MatomoTagManager />
+      </head>
       <body>
         <div id="root">
           <Link href="#main" className="skip-link">

@@ -6,7 +6,10 @@
     "start": "next start",
     "lint": "next lint",
     "test": "jest --coverage",
-    "prepare": "husky"
+    "prepare": "husky",
+    "backstop-approve": "backstop approve",
+    "backstop-test": "backstop test --docker",
+    "backstop-reference": "backstop reference --docker"
   },
   "dependencies": {
     "datatables.net-dt": "^2.2.2",
@@ -22,6 +25,7 @@
     "@testing-library/dom": "^10.4.0",
     "@testing-library/jest-dom": "^6.6.3",
     "@testing-library/react": "^16.2.0",
+    "backstopjs": "^6.3.25",
     "eslint": "^9",
     "eslint-config-next": "15.2.3",
     "eslint-config-prettier": "^10.1.1",

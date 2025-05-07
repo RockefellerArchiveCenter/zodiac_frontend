@@ -28,6 +28,32 @@
     {
       "label": "404 Page",
       "url": "http://host.docker.internal:3000/404"
+    },
+    {
+      "label": "Package Errors",
+      "url": "http://host.docker.internal:3000/errors"
+    },
+    {
+      "label": "Package Details",
+      "url": "http://host.docker.internal:3000/packages/f78742e5-6af9-4756-a94a-6cd297406d51"
+    },
+    {
+      "label": "Event Details",
+      "url": "http://host.docker.internal:3000/events/f78742e5-6af9-4756-a94a-6cd297406d55"
+    },
+    {
+      "label": "Rerun Service Modal",
+      "url": "http://host.docker.internal:3000/events/f78742e5-6af9-4756-a94a-6cd297406d55",
+      "clickSelector": ".btn"
+    },
+    {
+      "label": "Event Page Alert",
+      "url": "http://host.docker.internal:3000/events/f78742e5-6af9-4756-a94a-6cd297406d55",
+      "clickSelectors": [
+        ".btn",
+        ".btn--blue"
+      ],
+      "delay": 5000
     }
   ],
   "paths": {

@@ -7,11 +7,10 @@ function serveFixture(req, fixtureName) {
   if (fs.existsSync(fixturePath)) {
     let body = fs.readFileSync(fixturePath, "utf8");
 
-    // Do we need to handle dynamic draw data from Datatables?
-
     req.respond({
       status: 200,
       contentType: "application/json",
+      headers: { "Access-Control-Allow-Origin": "*" },
       body,
     });
     return true;
@@ -24,7 +23,10 @@ module.exports = async (page) => {
 
   page.on("request", (req) => {
     const url = req.url();
-    if (!url.startsWith("http://localhost:8000")) {
+    if (
+      // Intercept requests to the API using the baseurl from the .env file
+      !url.startsWith("http://localhost:8000")
+    ) {
       req.continue();
       return;
     }

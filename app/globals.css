@@ -1,4 +1,4 @@
-@import url("https://assets.rockarch.org/v1.0.0/main.min.css");
+@import url("https://assets.rockarch.org/v1.0.1/main.min.css");
 
 #main {
   grid-column: 2 / span 10;
@@ -122,12 +122,4 @@ div.dt-container .dt-search input {
   overflow-x: auto;
 }
 
-/* TODO: add these styles to the RAC Style Library alert component */
-.alert {
-  display: block;
-  word-break: break-word;
-  @media screen and (min-width: 580px) {
-    display: flex;
-  }
-}
 

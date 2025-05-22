@@ -52,7 +52,7 @@ describe("fetchData", () => {
 
     const result = await fetchData("/bad-endpoint");
     expect(result).toEqual({
-      error: `Failed to fetch data from /bad-endpoint. Status: 404 Not Found`,
+      error: `Failed to fetch data from https://api.example.com/bad-endpoint. Status: 404 Not Found`,
     });
   });
 
@@ -61,7 +61,7 @@ describe("fetchData", () => {
 
     const result = await fetchData("/error-endpoint");
     expect(result).toEqual({
-      error: `Error fetching data from /error-endpoint: Network failure`,
+      error: `Error fetching data from https://api.example.com/error-endpoint: Network failure`,
     });
   });
 });

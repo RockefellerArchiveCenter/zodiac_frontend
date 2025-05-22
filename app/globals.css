@@ -1,8 +1,29 @@
-@import url("https://assets.rockarch.org/v1.0.0/main.min.css");
+@import url("https://assets.rockarch.org/v1.0.1/main.min.css");
 
 #main {
   grid-column: 2 / span 10;
   margin-bottom: 30px;
+}
+
+/* Add header styles for small screens with just one nav item. This avoids implementing
+a script to handle a mobile nav menu */
+@media screen and (max-width: 580px) {
+  .header__container {
+    flex-direction: column;
+  }
+
+  .header__brand {
+    display: block;
+    margin-top: 15px;
+  }
+
+  .nav-right {
+    margin-left: 15px;
+  }
+
+  .nav__item {
+    border-left: 0px;
+  }
 }
 
 .card h2 {
@@ -100,3 +121,5 @@ div.dt-container .dt-search input {
 .dt-layout-full {
   overflow-x: auto;
 }
+
+

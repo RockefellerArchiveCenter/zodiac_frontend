@@ -28,8 +28,6 @@ fix any formatting errors before committing code.
 
 You can report any linting issues at any time by running `yarn lint`.
 
-## Visual regression testing
-
 ## License
 
 This code is released under an [MIT License](LICENSE).

@@ -22,7 +22,7 @@ export default function Template({ children }) {
           </Link>
           <header className="header header--blue">
             <div className="wrapper">
-              <div className="container flex">
+              <div className="container flex header__container">
                 <div className="header__brand header__brand--text">
                   <Link href="/" className="header__brand-title">
                     Zodiac

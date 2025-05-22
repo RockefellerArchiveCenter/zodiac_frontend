@@ -7,7 +7,7 @@ export async function fetchData(apiEndpoint) {
 
     if (!res.ok) {
       return {
-        error: `Failed to fetch data from ${apiEndpoint}. Status: ${res.status} ${res.statusText}`,
+        error: `Failed to fetch data from ${baseURL}${apiEndpoint}. Status: ${res.status} ${res.statusText}`,
       };
     }
 
@@ -24,7 +24,7 @@ export async function fetchData(apiEndpoint) {
 
     // Return an error object to use in UI
     return {
-      error: `Error fetching data from ${apiEndpoint}: ${error.message}`,
+      error: `Error fetching data from ${baseURL}${apiEndpoint}: ${error.message}`,
     };
   }
 }

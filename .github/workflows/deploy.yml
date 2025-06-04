@@ -17,7 +17,8 @@ jobs:
     env:
       APPLICATION_NAME: zodiac_frontend
       APPLICATION_PORT: 3000
-      AWS_BUCKET_NAME: "${{ github.ref_name == 'development' && 'rac-dev-codedeploy-apps' || 'rac-prod-deploy' }}"
+      AWS_BUCKET_NAME: "${{ github.ref_name == 'development' && 'rac-dev-deploy' || 'rac-prod-deploy' }}"
+      DAEMON_NAME: zodiac-frontend
       DEPLOY_ZIP_NAME: zodiac_frontend.zip
       DEPLOYMENT_GROUP: "${{ github.ref_name == 'development' && 'ZodiacFrontendDevelopment' || 'ZodiacFrontendProduction' }}"
 

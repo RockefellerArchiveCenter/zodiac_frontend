@@ -29,6 +29,18 @@ jobs:
         uses: actions/setup-node@v4.3.0
         with:
           node-version: 'lts/*'
+      
+      - name: Cache dependencies
+        uses: actions/cache@v4.2.3
+        id: yarn-cache
+        with:
+          path: ./node_modules
+          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}More actions
+          restore-keys: |
+            ${{ runner.os }}-yarn-
+
+      - name: Install dependencies
+        run: yarn install
 
       - name: Export secrets to environment variables
         uses: oNaiPs/secrets-to-env-action@v1.5
@@ -44,14 +56,25 @@ jobs:
           files: |
             .env.deploy
             appspec.yml.deploy
-            deploy_scripts/yarn_install.sh.deploy
-            deploy_scripts/yarn_start.sh.deploy
+            deploy_scripts/curl_index.sh.deploy
+            deploy_scripts/stop_nextjs.sh.deploy
+            deploy_scripts/restart_nextjs.sh.deploy
+            deploy_scripts/set_permissions.sh.deploy
+      
+      - name: Rename deploy files
+        run: |
+          mv .env.deploy .env
+          mv appspec.yml.deploy appspec.yml
+          mv deploy_scripts/curl_index.sh.deploy deploy_scripts/curl_index.sh
+          mv deploy_scripts/stop_nextjs.sh.deploy deploy_scripts/stop_nextjs.sh
+          mv deploy_scripts/restart_nextjs.sh.deploy deploy_scripts/restart_nextjs.sh
+          mv deploy_scripts/set_permissions.sh.deploy deploy_scripts/set_permissions.sh
 
-      - name: Replace env file
-        run: mv .env.deploy .env
+      - name: Build applicationMore actions
+        run: yarn run build
 
       - name: Make zip file
-        run: zip -r ${{ env.DEPLOY_ZIP_NAME }} .
+        run: zip -r ${{ env.DEPLOY_ZIP_NAME }} . -x node_modules/\* -x .git/\*
 
       - name: Configure AWS Credentials
         uses: aws-actions/configure-aws-credentials@v4.1.0

@@ -4,14 +4,14 @@ files:
   - source: ./
     destination: ${ROOT_DIR}
 hooks:
+  ApplicationStop:
+    - location: deploy_scripts/stop_nextjs.sh
   AfterInstall:
     - location: deploy_scripts/set_permissions.sh 
       timeout: 30
-    - location: deploy_scripts/yarn_install.sh
-      timeout: 300
-    - location: deploy_scripts/yarn_start.sh
-      timeout: 300
   ApplicationStart:
+    - location: deploy_scripts/restart_nextjs.sh
+      timeout: 300
     - location: deploy_scripts/restart_httpd.sh
       timeout: 20
   ValidateService:

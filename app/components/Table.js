@@ -27,6 +27,13 @@ export function constructColumns(columnsConfig) {
         },
       };
     }
+    if (col.data === "last_outcome") {
+      // If no data for last_outcome, show "IN PROCESS"
+      return {
+        ...col,
+        render: (data) => data || "IN PROCESS",
+      };
+    }
     return col;
   });
 }

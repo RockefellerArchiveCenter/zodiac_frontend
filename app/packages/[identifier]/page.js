@@ -44,7 +44,7 @@ export default async function PackageDetail({ params }) {
       ) : (
         <>
           <div className="mb-50">
-            <OutcomeBadge outcome={packageData.last_outcome} />
+            <OutcomeBadge outcome={packageData.status} />
           </div>
           <SummaryList
             className="mb-50"

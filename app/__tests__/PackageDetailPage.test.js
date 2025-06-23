@@ -10,7 +10,7 @@ const mockPackageData = {
   identifier: "f78742e5-6af9-4756-a94a-6cd297406d51",
   title: "Test Package",
   origin: "aurora",
-  last_outcome: "SUCCESS",
+  status: "SUCCESS",
   identifiers: {
     aurora_package:
       "https://aurora.dev.rockarch.org/api/transfers/1631/?format=json",
@@ -46,7 +46,7 @@ describe("Package Detail Page", () => {
 
     // Check if outcome is rendered
     expect(
-      screen.getByText(`STATUS: ${mockPackageData.last_outcome}`),
+      screen.getByText(`STATUS: ${mockPackageData.status}`),
     ).toBeInTheDocument();
 
     // Check if external identifiers are rendered (or "None" if undefined)

@@ -2,18 +2,15 @@
 // value, which is defined in a page-specific context.
 const OutcomeBadge = ({ outcome }) => {
   let badgeColor = "light-blue";
-  let badgeText = "IN PROCESS";
 
-  if (outcome === "SUCCESS") {
+  if (["COMPLETE", "SUCCESS"].includes(outcome)) {
     badgeColor = "blue";
-    badgeText = outcome;
-  } else if (outcome === "FAILURE") {
+  } else if (["FAILURE", "ERROR"].includes(outcome)) {
     badgeColor = "orange";
-    badgeText = outcome;
   }
 
   return (
-    <span className={`badge badge--${badgeColor}`}>STATUS: {badgeText}</span>
+    <span className={`badge badge--${badgeColor}`}>STATUS: {outcome}</span>
   );
 };
 

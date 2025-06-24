@@ -15,7 +15,11 @@ export default async function Errors() {
       linkPrefix: "/packages/",
       identifierKey: "package_identifier",
     },
-    { title: "Package ID", data: "package_identifier" },
+    {
+      title: "Package ID",
+      data: "package_identifier",
+      name: "package_identifier.identifier",
+    },
     {
       title: "Origin",
       data: "package_origin",

@@ -10,7 +10,7 @@ const mockPackageData = {
   identifier: "f78742e5-6af9-4756-a94a-6cd297406d51",
   title: "Test Package",
   origin: "aurora",
-  status: "SUCCESS",
+  status: "COMPLETE",
   identifiers: {
     aurora_package:
       "https://aurora.dev.rockarch.org/api/transfers/1631/?format=json",

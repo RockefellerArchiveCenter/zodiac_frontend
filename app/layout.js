@@ -1,5 +1,5 @@
-import "datatables.net-dt/css/dataTables.dataTables.css";
-import "./globals.css";
+import "./css/globals.css";
+import "./css/table.css";
 import Link from "next/link";
 import MatomoTagManager from "./components/MatomoTagManager";
 

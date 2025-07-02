@@ -60,6 +60,7 @@ export default async function PackageDetail({ params }) {
             <Table
               apiPath={`/packages/${identifier}/events`}
               columnsConfig={columnsConfig}
+              order={[[2, "desc"]]}
             />
           </div>
 

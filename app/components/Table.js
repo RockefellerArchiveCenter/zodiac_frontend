@@ -48,7 +48,7 @@ const DataTable = dynamic(
   },
 );
 
-export default function Table({ apiPath, columnsConfig }) {
+export default function Table({ apiPath, columnsConfig, order }) {
   const apiUrl = constructUrl(apiPath);
   const columns = constructColumns(columnsConfig);
   const [error, setError] = useState("");
@@ -79,6 +79,7 @@ export default function Table({ apiPath, columnsConfig }) {
           },
         },
         searching: true,
+        order: order,
         ordering: true,
         lengthMenu: [10, 25, 50, 100],
         language: {

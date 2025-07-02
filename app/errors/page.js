@@ -38,7 +38,11 @@ export default async function Errors() {
   return (
     <div>
       <h1>Package Errors</h1>
-      <Table apiPath="/events?outcome=FAILURE" columnsConfig={columnsConfig} />
+      <Table
+        apiPath="/events?outcome=FAILURE"
+        columnsConfig={columnsConfig}
+        order={[[4, "desc"]]}
+      />
     </div>
   );
 }

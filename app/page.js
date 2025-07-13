@@ -13,6 +13,7 @@ export default async function Home() {
     { title: "Package ID", data: "identifier" },
     { title: "Origin", data: "origin" },
     { title: "Status", data: "status" },
+    { title: "Created", data: "created" },
   ];
 
   return (

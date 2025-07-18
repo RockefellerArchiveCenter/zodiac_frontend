@@ -5,7 +5,7 @@ on:
   push:
     branches:
       - development
-      # - base
+      - base
 
 jobs:
   build:

@@ -1,0 +1,21 @@
+version: 0.0
+os: linux
+files:
+  - source: ./
+    destination: ${ROOT_DIR}
+hooks:
+  ApplicationStop:
+    - location: deploy_scripts/stop_nextjs.sh
+      runas: harnold
+  AfterInstall:
+    - location: deploy_scripts/set_permissions.sh 
+      timeout: 30
+  ApplicationStart:
+    - location: deploy_scripts/restart_nextjs.sh
+      runas: harnold
+      timeout: 300
+    - location: deploy_scripts/restart_httpd.sh
+      timeout: 20
+  ValidateService:
+    - location: deploy_scripts/curl_index.sh
+      timeout: 10

@@ -23,15 +23,15 @@ jobs:
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v4.2.2
+        uses: actions/checkout@v5.0.0
 
       - name: Use Node.js
-        uses: actions/setup-node@v4.3.0
+        uses: actions/setup-node@v4.4.0
         with:
           node-version: 'lts/*'
       
       - name: Cache dependencies
-        uses: actions/cache@v4.2.3
+        uses: actions/cache@v4.2.4
         id: yarn-cache
         with:
           path: ./node_modules
@@ -77,7 +77,7 @@ jobs:
         run: zip -r ${{ env.DEPLOY_ZIP_NAME }} . -x node_modules/\* -x .git/\*
 
       - name: Configure AWS Credentials
-        uses: aws-actions/configure-aws-credentials@v4.1.0
+        uses: aws-actions/configure-aws-credentials@v4.3.1
         with:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}

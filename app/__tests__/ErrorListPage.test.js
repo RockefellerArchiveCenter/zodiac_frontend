@@ -13,6 +13,6 @@ describe("Error List Page", () => {
     render(await Errors());
 
     // Check if the page title is rendered
-    expect(screen.getByText("Package Errors")).toBeInTheDocument();
+    expect(screen.getByText("Unresolved Package Errors")).toBeInTheDocument();
   });
 });

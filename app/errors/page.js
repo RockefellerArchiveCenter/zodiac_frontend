@@ -2,44 +2,35 @@
 import Table from "@/components/Table";
 
 export const metadata = {
-  title: "Package Errors - Zodiac",
+  title: "Unresolved Package Errors - Zodiac",
 };
 
 export default async function Errors() {
   const columnsConfig = [
     {
       title: "Title",
-      data: "package_title",
-      name: "package_identifier.title",
+      data: "title",
       type: "link",
       linkPrefix: "/packages/",
-      identifierKey: "package_identifier",
-    },
-    {
-      title: "Package ID",
-      data: "package_identifier",
-      name: "package_identifier.identifier",
-    },
-    {
-      title: "Origin",
-      data: "package_origin",
-      name: "package_identifier.origin",
-    },
-    {
-      title: "Service Error",
-      data: "message",
-      type: "link",
-      linkPrefix: "/events/",
       identifierKey: "identifier",
     },
-    { title: "Date/Time", data: "last_modified" },
+    { title: "Package ID", data: "identifier" },
+    { title: "Origin", data: "origin" },
+    {
+      title: "Service Error",
+      data: "error_message",
+      type: "link",
+      linkPrefix: "/events/",
+      identifierKey: "error_identifier",
+    },
+    { title: "Date/Time", data: "created" },
   ];
 
   return (
     <div>
-      <h1>Package Errors</h1>
+      <h1>Unresolved Package Errors</h1>
       <Table
-        apiPath="/events?outcome=FAILURE"
+        apiPath="/packages?status=ERROR"
         columnsConfig={columnsConfig}
         order={[[4, "desc"]]}
       />

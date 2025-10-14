@@ -1,7 +1,6 @@
 import { fetchData } from "@/lib/fetchData";
 import Alert from "@/components/Alert";
 import LocalStorageAlert from "@/components/LocalStorageAlert";
-import RerunService from "@/components/RerunService";
 import OutcomeBadge from "@/components/OutcomeBadge";
 import SummaryList from "@/components/SummaryList";
 import Link from "next/link";
@@ -56,9 +55,6 @@ export default async function EventDetail({ params }) {
               },
             ]}
           />
-          {eventData.outcome == "FAILURE" && (
-            <RerunService eventData={eventData} />
-          )}
         </>
       )}
     </div>

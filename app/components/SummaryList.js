@@ -10,12 +10,9 @@ const SummaryList = ({ title, items, className }) => (
     {title && <h2>{title}</h2>}
     <dl className="summary-list">
       {items &&
-        items.map(
-          (i) =>
-            i.value && (
-              <SummaryListItem key={i.label} label={i.label} value={i.value} />
-            ),
-        )}
+        items.map((i) => (
+          <SummaryListItem key={i.label} label={i.label} value={i.value} />
+        ))}
     </dl>
   </div>
 );

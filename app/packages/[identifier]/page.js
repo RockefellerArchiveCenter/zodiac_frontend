@@ -85,6 +85,10 @@ export default async function PackageDetail({ params }) {
                 label: "ArchivesSpace Archival Object",
                 value: identifiers.archivesspace_archival_object,
               },
+              {
+                label: "DIMES UUID",
+                value: identifiers.dimes_object,
+              },
             ]}
           />
         </>

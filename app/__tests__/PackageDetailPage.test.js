@@ -56,7 +56,7 @@ describe("Package Detail Page", () => {
     expect(
       screen.getByText(mockPackageData.identifiers.archivematica_uuid),
     ).toBeInTheDocument();
-    expect(screen.getByText("None")).toBeInTheDocument();
+    expect(screen.getAllByText("None")).toBeInTheDocument();
   });
 
   it("handles fetchData errors correctly", async () => {

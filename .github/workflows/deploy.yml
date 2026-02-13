@@ -74,7 +74,7 @@ jobs:
         run: yarn run build
 
       - name: Make zip file
-        run: zip -r ${{ env.DEPLOY_ZIP_NAME }} . -x node_modules/\* -x .git/\*
+        run: zip -r ${{ env.DEPLOY_ZIP_NAME }} . -x .git/\*
 
       - name: Configure AWS Credentials
         uses: aws-actions/configure-aws-credentials@v5.1.1

@@ -44,7 +44,7 @@ div.dt-container .dt-search input {
   padding: 10px;
   width: 100%;
 
-  @media screen and (min-width: 580px) {
+  @media screen and (min-width: 36.25em) {
     width: 400px;
   }
 }

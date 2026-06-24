@@ -85,6 +85,13 @@ export default function Table({ apiPath, columnsConfig, order }) {
         language: {
           emptyTable: "No data available",
         },
+        layout: {
+          topEnd: {
+            search: {
+              text: "Search title, origin, status, and identifiers:",
+            },
+          },
+        },
       }}
     >
       <></>

@@ -88,7 +88,7 @@ export default function Table({ apiPath, columnsConfig, order }) {
         layout: {
           topEnd: {
             search: {
-              text: "Search title, origin, status, and identifiers:",
+              text: "Search all fields and identifiers",
             },
           },
         },

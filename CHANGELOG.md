@@ -1,5 +1,14 @@
 # Changelog
 
+## [1.1.0](https://github.com/RockefellerArchiveCenter/zodiac_frontend/compare/v1.0.0...v1.1.0) (2026-06-24)
+
+
+### Features
+
+* adds support for searching all identifiers ([22eeae2](https://github.com/RockefellerArchiveCenter/zodiac_frontend/commit/22eeae230fe0a221b6e44afba871d49081f2855e))
+* improve table layout and search label text ([06ff903](https://github.com/RockefellerArchiveCenter/zodiac_frontend/commit/06ff903ee8318fde8b8d631e8c7c71c0f5274d82))
+* support searching of all identifiers ([54f96da](https://github.com/RockefellerArchiveCenter/zodiac_frontend/commit/54f96dad320c2b9a354b86255b8619776bea9b35))
+
 ## 1.0.0 (2026-06-18)
 
 

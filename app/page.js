@@ -11,6 +11,7 @@ export default async function Home() {
       identifierKey: "identifier",
     },
     { title: "Package ID", data: "identifier" },
+    { title: "Identifiers", data: "identifiers", visible: false },
     { title: "Origin", data: "origin" },
     { title: "Status", data: "status" },
     { title: "Created", data: "created" },

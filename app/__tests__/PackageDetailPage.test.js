@@ -18,6 +18,7 @@ const mockPackageData = {
     archivematica_uuid: "0a9c6171-a18d-4ff6-b9e7-bef01aaded10",
     archivesspace_accession: undefined,
     archivesspace_archival_object: "/repositories/2/archival_objects/2153",
+    archivesspace_ref_id: "3581b60c338d4115878259c71552d1c9",
     dimes_object: "6dHZo7u6tWrdj5LroFFeWf",
   },
 };
